@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 exports.__esModule = true;
 var utils_1 = require("./utils");
-//1.输入一个自然数N，打印N个星号，每行一个。 
+//用ts接收键盘输入 input函数比较复杂 封装在utils.ts中
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var answer;
     return __generator(this, function (_a) {

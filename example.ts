@@ -1,11 +1,7 @@
 import { input } from './utils';
 
-//1.输入一个自然数N，打印N个星号，每行一个。 
+//用ts接收键盘输入 input函数比较复杂 封装在utils.ts中
 (async () => {
-
-
-let answer = await input('What do you think of Node.js? ');
-
-console.log(`Thank you for your valuable feedback: ${answer}`);
-
+    let answer = await input('What do you think of Node.js? ');
+    console.log(`Thank you for your valuable feedback: ${answer}`);
 })();

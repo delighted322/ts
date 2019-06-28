@@ -405,13 +405,7 @@ var utils_1 = require("./utils");
 }); });
 //1.20输入一个小于20的数N，求1 * 2 * 3 * ... * N（即求N的阶乘）
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    function result(N) {
-        if (N == 1) {
-            return 1;
-        }
-        return result(N - 1) * N;
-    }
-    var N, _a, num;
+    var N, _a, fn;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -419,7 +413,59 @@ var utils_1 = require("./utils");
                 return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
             case 1:
                 N = _a.apply(void 0, [_b.sent()]);
-                num = result(N);
+                fn = function (N) {
+                    if (N == 1) {
+                        return 1;
+                    }
+                    return fn(N - 1) * N;
+                };
+                console.log(fn(N));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//1.21到文具店里买尽量多的签字笔。已知一只签字笔的价格是1元9角，而班主任给小玉的钱是A元B角，小玉想知道，她最多能买多少只签字笔呢
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var A, _a, B, _b, num;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数A: ")];
+            case 1:
+                A = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数B: ")];
+            case 2:
+                B = _b.apply(void 0, [_c.sent()]);
+                num = (A * 10 + B) / (1 * 10 + 9);
+                console.log(num - (num % 1));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//1.22输入两个小数M和N，计算它们的和，并四舍五入到整数，将计算结果打印出来
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, num, float;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                num = M + N;
+                float = num % 1;
+                if (float >= 0.5) {
+                    num = num - float + 1;
+                }
+                else {
+                    num = num - float;
+                }
                 console.log(num);
                 return [2 /*return*/];
         }

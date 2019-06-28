@@ -184,19 +184,38 @@ import {input} from './utils'
 //1.20输入一个小于20的数N，求1 * 2 * 3 * ... * N（即求N的阶乘）
 (async () => {
     let N = Number(await input("输入一个自然数N: "))
-    function result(N) {
+    let fn = N => {
         if (N == 1) {
             return 1
         }
-        return result(N - 1) * N
+        return fn(N - 1) * N
     }
-    let num = result(N)
-    console.log(num)
+    console.log(fn(N))
 });
 
 //1.21到文具店里买尽量多的签字笔。已知一只签字笔的价格是1元9角，而班主任给小玉的钱是A元B角，小玉想知道，她最多能买多少只签字笔呢
 (async () => {
     let A = Number(await input("输入一个自然数A: "))
     let B = Number(await input("输入一个自然数B: "))
+    let num = (A * 10 + B) / (1 * 10 + 9)
+    console.log(num - (num % 1))
+});
+
+//1.22输入两个小数M和N，计算它们的和，并四舍五入到整数，将计算结果打印出来
+(async () => {
+    let M = Number(await input("输入一个自然数M: "))
+    let N = Number(await input("输入一个自然数N: "))
+    let num = M + N
+    let float = num % 1
+    if (float >= 0.5) {
+        num = num - float +1
+    } else {
+        num = num - float
+    }
+    console.log(num)
+});
+
+//2.1某车站行李托运收费标准是:10公斤或10公斤以下，收费2.5 元，超过10公斤的行李，按每超过1公斤增加1.5元进行收费。试编一程序，输入行李的重量，算出托运费。
+(async () => {
 
 })();

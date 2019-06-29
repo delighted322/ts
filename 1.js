@@ -470,4 +470,152 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
+}); });
+//2.1某车站行李托运收费标准是:10公斤或10公斤以下，收费2.5 元，超过10公斤的行李，按每超过1公斤增加1.5元进行收费。试编一程序，输入行李的重量，算出托运费。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, extra;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                if (N <= 10) {
+                    console.log(2.5);
+                }
+                else {
+                    extra = N - (N % 1) - 10;
+                    console.log(2.5 + 1.5 * extra);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.2.输入某学生成绩，如果86分以上（包括86分）则输出“VERY GOOD”，如果在60到85之间的则输出“GOOD”（包括60和85），小于60的则输出“BAD”
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                if (N < 60) {
+                    console.log("BAD");
+                }
+                else if ((N >= 60) && (N <= 85)) {
+                    console.log("GOOD");
+                }
+                else {
+                    console.log("VERY GOOD");
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.3输入一个月份，输出该月是多少天（假设是平年不是闰年）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, b;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                b = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                console.log(b[N - 1]);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.4输入某月某日,判断这一天是这一年的第几天?（假设是平年）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var month, _a, day, _b, b, sum, i;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入月 month: ")];
+            case 1:
+                month = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入日 day: ")];
+            case 2:
+                day = _b.apply(void 0, [_c.sent()]);
+                b = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                sum = 0;
+                for (i = 1; i < month; i++) {
+                    sum += b[i - 1];
+                }
+                sum += day;
+                console.log(sum);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.5输入一个年份，如果是闰年，则输出“TRUE”,否则输出“FALSE”
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var year, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入年份: ")];
+            case 1:
+                year = _a.apply(void 0, [_b.sent()]);
+                if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                    console.log("TRUE");
+                }
+                else {
+                    console.log("FALSe");
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.6输入一个年份和月份，输出该月是多少天
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var year, _a, month, _b, ping, run;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入年份: ")];
+            case 1:
+                year = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入月 month: ")];
+            case 2:
+                month = _b.apply(void 0, [_c.sent()]);
+                ping = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                run = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                    console.log(run[month - 1]);
+                }
+                else {
+                    console.log(ping[month - 1]);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.7电子表上的时间显示方法形如xx:xx:xx，现在给出一个时间N，单位是秒，要求按照电子表格式输出。输出保证不会超过24小时
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var time, _a, h;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入时间: ")];
+            case 1:
+                time = _a.apply(void 0, [_b.sent()]);
+                h = time / (60 * 60);
+                h = h - h % 1;
+                console.log(h);
+                return [2 /*return*/];
+        }
+    });
 }); })();

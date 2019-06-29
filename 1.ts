@@ -217,5 +217,74 @@ import {input} from './utils'
 
 //2.1某车站行李托运收费标准是:10公斤或10公斤以下，收费2.5 元，超过10公斤的行李，按每超过1公斤增加1.5元进行收费。试编一程序，输入行李的重量，算出托运费。
 (async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    if (N <= 10) {
+        console.log(2.5)
+    } else {
+        let extra = N - (N % 1) - 10 
+        console.log(2.5 + 1.5 * extra)
+    }
+});
 
+//2.2.输入某学生成绩，如果86分以上（包括86分）则输出“VERY GOOD”，如果在60到85之间的则输出“GOOD”（包括60和85），小于60的则输出“BAD”
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    if (N < 60) {
+        console.log("BAD")
+    } else if ((N >= 60) && (N <= 85)){
+        console.log("GOOD")
+    } else {
+        console.log("VERY GOOD")
+    }
+});
+
+//2.3输入一个月份，输出该月是多少天（假设是平年不是闰年）
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let b = [31,28,31,30,31,30,31,31,30,31,30,31]
+    console.log(b[N - 1])
+});
+
+//2.4输入某月某日,判断这一天是这一年的第几天?（假设是平年）
+(async () => {
+    let month = Number(await input("输入月 month: "))
+    let day = Number(await input("输入日 day: "))
+    let b = [31,28,31,30,31,30,31,31,30,31,30,31]
+    let sum = 0
+    for (let i = 1; i < month; i++) {
+        sum += b[i - 1]
+    }
+    sum += day
+    console.log(sum)
+});
+
+//2.5输入一个年份，如果是闰年，则输出“TRUE”,否则输出“FALSE”
+(async () => {
+    let year = Number(await input("输入年份: "))
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+        console.log("TRUE")
+    } else {
+        console.log("FALSe")
+    }
+});
+
+//2.6输入一个年份和月份，输出该月是多少天
+(async () => {
+    let year = Number(await input("输入年份: "))
+    let month = Number(await input("输入月 month: "))
+    let ping = [31,28,31,30,31,30,31,31,30,31,30,31]
+    let run = [31,29,31,30,31,30,31,31,30,31,30,31]
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+        console.log(run[month - 1])      
+    } else {
+        console.log(ping[month - 1])
+    }
+});
+
+//2.7电子表上的时间显示方法形如xx:xx:xx，现在给出一个时间N，单位是秒，要求按照电子表格式输出。输出保证不会超过24小时
+(async () => {
+    let time = Number(await input("输入时间: "))
+    let h = time / (60 * 60)
+    h = h - h%1
+    console.log(h)
 })();

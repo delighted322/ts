@@ -604,7 +604,7 @@ var utils_1 = require("./utils");
 }); });
 //2.7电子表上的时间显示方法形如xx:xx:xx，现在给出一个时间N，单位是秒，要求按照电子表格式输出。输出保证不会超过24小时
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var time, _a, h;
+    var time, _a, h, m, s, str, list, i;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -614,7 +614,23 @@ var utils_1 = require("./utils");
                 time = _a.apply(void 0, [_b.sent()]);
                 h = time / (60 * 60);
                 h = h - h % 1;
-                console.log(h);
+                m = (time - 60 * 60 * h) / 60;
+                m = m - m % 1;
+                s = time % 60;
+                str = "";
+                list = [h, m, s];
+                for (i in list) {
+                    if (list[i] < 10) {
+                        str += "0" + list[i];
+                    }
+                    else {
+                        str += list[i];
+                    }
+                    if (Number(i) != 2) {
+                        str += ":";
+                    }
+                }
+                console.log(str);
                 return [2 /*return*/];
         }
     });

@@ -285,6 +285,24 @@ import {input} from './utils'
 (async () => {
     let time = Number(await input("输入时间: "))
     let h = time / (60 * 60)
-    h = h - h%1
-    console.log(h)
-})();
+    h = h - h % 1
+    let m = (time - 60 * 60 * h) / 60
+    m = m - m % 1
+    let s = time % 60
+    let str = ""
+    let list = [h, m, s]
+    for (let i in list) {
+        if (list[i] < 10) {
+            str += "0" + list[i]
+        } else {
+            str += list[i]
+        }
+        if (Number(i) != 2) {
+            str += ":"
+        }
+    }
+    console.log(str)
+});
+
+//2.8东东给自己的做题时间做了精确的计时(计时按 24 小时制计算)，他从 A 时 B 分一直做到当天的 C 时 D 分，请你帮他计算一下，他这天一共做 了多少时间呢?
+

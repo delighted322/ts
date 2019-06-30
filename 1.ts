@@ -304,5 +304,57 @@ import {input} from './utils'
     console.log(str)
 });
 
-//2.8东东给自己的做题时间做了精确的计时(计时按 24 小时制计算)，他从 A 时 B 分一直做到当天的 C 时 D 分，请你帮他计算一下，他这天一共做 了多少时间呢?
+//2.8东东给自己的做题时间做了精确的计时(计时按 24 小时制计算)，他从 A 时 B 分一直做到当天的 C 时 D 分，请你帮他计算一下，他这天一共做了多少时间呢?
+(async () => {
+    let A = Number(await input("输入一个自然数A: "))
+    let B = Number(await input("输入一个自然数B: "))
+    let C = Number(await input("输入一个自然数C: "))   
+    let D = Number(await input("输入一个自然数D: "))
+    let min = 60 - B + 60 * (C - A - 1) + D
+    let m = min % 60
+    let h = (min - m) / 60
+    console.log(h,"时",m,"分")
+});
 
+//2.9一个笼子里面关了鸡和兔子（鸡有2只脚，兔子有4只脚，没有例外）。已经知道了笼子里面脚的总数a，问笼子里面至少有多少只动物，至多有多少只动物
+(async () => {
+    let A = Number(await input("输入一个自然数A: "))
+    let most = A / 2
+    let lest = (A - (A % 4)) / 4 + (A % 4) / 2
+    console.log("至少有",lest,"只","至多有",most,"只")
+});
+
+//2.10你买了一箱n个苹果，很不幸的是买完时箱子里混进了一条虫子。虫子每x小时能吃掉一个苹果，假设虫子在吃完一个苹果之前不会吃另一个，那么经过y小时你还有多少个完整的苹果？
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let X = Number(await input("输入一个自然数X: "))
+    let Y = Number(await input("输入一个自然数Y: "))
+    let num = N - Math.ceil(Y / X)
+    console.log(num)
+});
+
+//2.11相传韩信才智过人，从不直接清点自己军队的人数，只要让士兵先后以三人一排、五人一排、七人一排地变换队形，而他每次只掠一眼队伍的排尾就知道总人数了。
+//输入3个非负整数a，b，c，表示每种队形排尾的人数（a<3，b<5，c<7），输出总人数的最小值，如果没有则输出no。例如：输入2 1 6 输出：41
+(async () => {
+    let A = Number(await input("输入一个自然数A: "))
+    let B = Number(await input("输入一个自然数B: "))
+    let C = Number(await input("输入一个自然数C: "))
+    let num = 1
+    while (true) {
+        if ((num % 7 == C) && (num % 5 == B) && (num % 3 == A)) {
+            console.log(num)
+            break
+        }
+        num++
+    }
+});
+
+//2.12某程序员开始工作，年薪N（N不小于20）万，他希望在中关村公馆买一套60平米的房子，现在价格是200万，假设房子价格以每年百分之K（K不超过3）增长，
+//并且该程序员未来年薪不变，且不吃不喝，不用交税，每年所得N万全都积攒起来，问第几年能够买下这套房子？（第一年年薪N万，房价200万）
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let K = Number(await input("输入一个自然数K: "))
+    let price = 200
+    let money = 20
+
+})();

@@ -634,4 +634,106 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
+}); });
+//2.8东东给自己的做题时间做了精确的计时(计时按 24 小时制计算)，他从 A 时 B 分一直做到当天的 C 时 D 分，请你帮他计算一下，他这天一共做了多少时间呢?
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var A, _a, B, _b, C, _c, D, _d, min, m, h;
+    return __generator(this, function (_e) {
+        switch (_e.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数A: ")];
+            case 1:
+                A = _a.apply(void 0, [_e.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数B: ")];
+            case 2:
+                B = _b.apply(void 0, [_e.sent()]);
+                _c = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数C: ")];
+            case 3:
+                C = _c.apply(void 0, [_e.sent()]);
+                _d = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数D: ")];
+            case 4:
+                D = _d.apply(void 0, [_e.sent()]);
+                min = 60 - B + 60 * (C - A - 1) + D;
+                m = min % 60;
+                h = (min - m) / 60;
+                console.log(h, "时", m, "分");
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.9一个笼子里面关了鸡和兔子（鸡有2只脚，兔子有4只脚，没有例外）。已经知道了笼子里面脚的总数a，问笼子里面至少有多少只动物，至多有多少只动物
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var A, _a, most, lest;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数A: ")];
+            case 1:
+                A = _a.apply(void 0, [_b.sent()]);
+                most = A / 2;
+                lest = (A - (A % 4)) / 4 + (A % 4) / 2;
+                console.log("至少有", lest, "只", "至多有", most, "只");
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.10你买了一箱n个苹果，很不幸的是买完时箱子里混进了一条虫子。虫子每x小时能吃掉一个苹果，假设虫子在吃完一个苹果之前不会吃另一个，那么经过y小时你还有多少个完整的苹果？
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, X, _b, Y, _c, num;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_d.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数X: ")];
+            case 2:
+                X = _b.apply(void 0, [_d.sent()]);
+                _c = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数Y: ")];
+            case 3:
+                Y = _c.apply(void 0, [_d.sent()]);
+                num = N - Math.ceil(Y / X);
+                console.log(num);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.11相传韩信才智过人，从不直接清点自己军队的人数，只要让士兵先后以三人一排、五人一排、七人一排地变换队形，而他每次只掠一眼队伍的排尾就知道总人数了。
+//输入3个非负整数a，b，c，表示每种队形排尾的人数（a<3，b<5，c<7），输出总人数的最小值，如果没有则输出no。例如：输入2 1 6 输出：41
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var A, _a, B, _b, C, _c, num;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数A: ")];
+            case 1:
+                A = _a.apply(void 0, [_d.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数B: ")];
+            case 2:
+                B = _b.apply(void 0, [_d.sent()]);
+                _c = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数C: ")];
+            case 3:
+                C = _c.apply(void 0, [_d.sent()]);
+                num = 1;
+                while (true) {
+                    if ((num % 7 == C) && (num % 5 == B) && (num % 3 == A)) {
+                        console.log(num);
+                        break;
+                    }
+                    num++;
+                }
+                return [2 /*return*/];
+        }
+    });
 }); })();

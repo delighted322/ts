@@ -736,4 +736,96 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
+}); });
+//2.12某程序员开始工作，年薪N（N不小于20）万，他希望在中关村公馆买一套60平米的房子，现在价格是200万，假设房子价格以每年百分之K（K不超过3）增长，
+//并且该程序员未来年薪不变，且不吃不喝，不用交税，每年所得N万全都积攒起来，问第几年能够买下这套房子？（第一年年薪N万，房价200万）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, K, _b, price, money, year;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数K: ")];
+            case 2:
+                K = _b.apply(void 0, [_c.sent()]);
+                price = 200;
+                money = N;
+                year = 1;
+                while (money < price) {
+                    price = price * (1 + K / 100);
+                    money += 20;
+                    year += 1;
+                }
+                console.log(year);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.13用100元钱买100只鸡，公鸡，母鸡，小鸡都要有。公鸡5元1只，母鸡3元1只，小鸡1元3只。请问公鸡，母鸡，小鸡各应该买多少只？
+//要求专款专用(至少公母小各一),正好用完?请求出所有方案。
+(function () {
+    var rooster = 1;
+    var hen = 1;
+    var chicken;
+    for (var rooster_1 = 1; rooster_1 < 100; rooster_1++) {
+        for (var hen_1 = 1; hen_1 < 100; hen_1++) {
+            chicken = 100 - rooster_1 - hen_1;
+            if ((5 * rooster_1 + hen_1 * 3 + chicken / 3) == 100 && chicken >= 1) {
+                console.log(rooster_1, hen_1, chicken);
+            }
+        }
+    }
+});
+//2.14数学上把2的K次方叫2的K次幂（K为整数），如4、8、32等。给定一个整数n(n>0)，请输出距离它最近的那个2的幂是多少。
+//如果有两个距离相同，输出那个小的.
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, k, result;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                k = 0;
+                result = 1;
+                while (result < N) {
+                    result *= 2;
+                    k++;
+                }
+                if (result - N < N - result / 2) {
+                    console.log(k);
+                }
+                else {
+                    console.log(k - 1);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.15已知：Sn = 1 + 1/2 + 1/3 + ... + 1/n。显然对于任意一个整数K，当n足够大的时候，Sn大于K。
+//现给出一个整数K（1 <= k <= 15），要求计算出一个最小的n;使得Sn>K。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var K, _a, sum, n;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数K: ")];
+            case 1:
+                K = _a.apply(void 0, [_b.sent()]);
+                sum = 0;
+                n = 1;
+                while (sum < K) {
+                    sum += 1 / n;
+                    n++;
+                }
+                console.log(n - 1);
+                return [2 /*return*/];
+        }
+    });
 }); })();

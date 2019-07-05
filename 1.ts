@@ -355,6 +355,68 @@ import {input} from './utils'
     let N = Number(await input("输入一个自然数N: "))
     let K = Number(await input("输入一个自然数K: "))
     let price = 200
-    let money = 20
+    let money = N
+    let year = 1
+    while (money < price) {
+        price = price * (1 + K/100)
+        money += 20
+        year += 1
+    }
+    console.log(year)
+});
+
+//2.13用100元钱买100只鸡，公鸡，母鸡，小鸡都要有。公鸡5元1只，母鸡3元1只，小鸡1元3只。请问公鸡，母鸡，小鸡各应该买多少只？
+//要求专款专用(至少公母小各一),正好用完?请求出所有方案。
+(() => {
+    let rooster = 1
+    let hen = 1
+    let chicken
+    for (let rooster = 1; rooster < 100; rooster++) {
+        for (let hen = 1; hen < 100; hen++) {
+            chicken = 100 - rooster - hen
+            if ((5 * rooster + hen * 3 + chicken / 3) == 100 && chicken >= 1) {
+                console.log(rooster, hen, chicken)
+            }
+        }
+    }
+});
+
+//2.14数学上把2的K次方叫2的K次幂（K为整数），如4、8、32等。给定一个整数n(n>0)，请输出距离它最近的那个2的幂是多少。
+//如果有两个距离相同，输出那个小的.
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let k = 0
+    let result = 1
+    while (result < N) {
+        result *= 2
+        k++
+    }
+    if (result - N < N - result / 2) {
+        console.log(k)
+    } else {
+        console.log(k - 1)
+    }
+});
+
+//2.15已知：Sn = 1 + 1/2 + 1/3 + ... + 1/n。显然对于任意一个整数K，当n足够大的时候，Sn大于K。
+//现给出一个整数K（1 <= k <= 15），要求计算出一个最小的n;使得Sn>K。
+(async () => {
+    let K = Number(await input("输入一个自然数K: "))
+    let sum = 0
+    let n = 1
+    while (sum < K) {
+        sum += 1 / n
+        n++
+    }
+    console.log(n - 1)
+});
+
+//2.16一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在第10次落地时，共经过多少米？第10次反弹多高？
+(() => {
+    let pass = 100
+    let height = 50
+    for (let i = 0; i < 10; i++) {
+        
+    }
 
 })();

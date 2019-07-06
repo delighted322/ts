@@ -415,8 +415,224 @@ import {input} from './utils'
 (() => {
     let pass = 100
     let height = 50
-    for (let i = 0; i < 10; i++) {
-        
+    for (let i = 0; i < 9; i++) {
+        pass += height * 2
+        height /= 2
+    }
+    console.log(pass, height)
+});
+
+//2.17有一天，无聊的小明从1开始数数，同时在纸上写下每个数的个位数字。因为他非常热爱直角三角形，所以在纸上写下的数字按照直角三角形排列。
+//现在告诉你他写了N行数字，要求你打出这些数字。提示:print(‘xx’,end=‘’)是不换行，print(‘’)是换行
+// 举例：N=5
+// 1
+// 23
+// 456
+// 7890
+// 12345
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let num = 1
+    let str = ""
+    for (let i = 1; i <= N; i++) {
+        str = ""
+        for (let j = 1; j <= i; j++) {
+            str = str + num + " "
+            num += 1
+            if (num == 10) {
+                num = 0
+            }
+        }
+        console.log(str)
+    }
+});
+
+//2.18有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前n项之和并保留两位小数。
+(async() => {
+    let N = Number(await input("输入一个自然数N: "))
+    function fibonacci(n) {
+        if (n == 1) {
+            return 1
+        }
+        if (n == 2) {
+            return 2
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2)
+    }
+    
+    function sum(n:number) {
+        let result = 0
+        for (let i = 1; i <= n; i++) {
+            result += fibonacci(i + 1) / fibonacci(i) 
+        }
+        console.log(result)
+    }
+    sum(N)
+});
+
+//3.1输入三个自然数M、N和P,打印它们三个当中最小的那个
+(async () => {
+    let M = Number(await input("输入一个自然数M: "))
+    let N = Number(await input("输入一个自然数N: "))
+    let P = Number(await input("输入一个自然数P: "))
+    let min : Number 
+    if(M < N) {
+        min = M < P ?  M : P
+    } else {
+        min = N < P ? N : P
+    }
+    console.log(min)
+});
+
+//3.2输入三个自然数M、N和P,按照从大到小的顺序打印这三个数。
+//TODO 相等的情况还没考虑
+(async() => {
+    let M = Number(await input("输入一个自然数M: "))
+    let N = Number(await input("输入一个自然数N: "))
+    let P = Number(await input("输入一个自然数P: "))
+    let str = ""
+    let min : Number
+    let max : Number
+    let middle : Number
+    if(M < N) {
+        min = M < P ?  M : P
+        max = N > P ?  N : P
+    } else {
+        min = N < P ? N : P
+        max = M > P ? M : P
+    }
+    let array = [M, N, P]
+    for (let i of array) {
+        if (i < max && i > min) {
+            middle = i
+        }
+    }
+    str = str + max + " " + middle + " " + min
+    console.log(str)
+});
+
+//3.3对于一个任意的三位自然数x，编程计算其各个数位上的数字之和
+(async() => {
+    let X = Number(await input("输入一个任意的三位自然数X: "))
+    let a = X % 10
+    let b = Math.floor(X % 100 / 10)
+    let c = Math.floor(X / 100)
+    console.log(c + b + a)
+});
+
+//3.4输入一个三位自然数，然后把这个数倒序输出，注意输出中不要有前置0的存在
+(async () => {
+    let X = Number(await input("输入一个任意的三位自然数X: "))
+    let a = X % 10
+    let b = Math.floor(X % 100 / 10)
+    let c = Math.floor(X / 100)
+    if (a == 0) {
+        console.log("" + b + c)
+    } else {
+        console.log("" + a + b + c)
+    }
+});
+
+//3.5任意输入一个三位整数，再把它的次序打乱重新组合一个新的三位整数，使其值最大
+(async () => {
+    let X = Number(await input("输入一个任意的三位自然数X: "))
+    let a = X % 10
+    let b = Math.floor(X % 100 / 10)
+    let c = Math.floor(X / 100)
+    let str = ""
+    if (a > b) {
+        if (a > c) {
+            str += a
+            if (b > c) {
+                str += "" + b + c
+            } else {
+                str += "" + c + b
+            }
+        } else {
+            str += c
+            if (a > b) {
+                str += "" + a + b
+            } else {
+                str += "" +b + a
+            }
+        }
+    } else {
+        if (b > c) {
+            str += b
+            if (a > c) {
+                str += "" + a + c
+            } else {
+                str += "" + c + a
+            }
+        } else {
+            str += c
+            if (a > b) {
+                str += "" + a + b
+            } else {
+                str += "" + b + a
+            }
+        }
+    }
+    console.log(str)
+});
+
+//3.6 1，2 .... 9组成三个三位数，每个三位数中的数字不可重复（例如112，131等），使这三个三位数构成1 ：2 ：3的比例，求出所有满足条件的三个三位数
+// TODO 要简化
+(() => {
+    let a = 0
+    let b = 0
+    let c = 0
+    for (let i = 1; i < 4; i++) {
+        for (let j = 1; j < 10; j++) {
+            if (i == j) {
+                continue
+            }
+            for (let z = 1; z < 10; z++) {
+                if (z == i || z == j) {
+                    continue
+                }
+                a = i * 100 + j * 10 + z
+                b = 2 * a
+                c = 3 * a
+                if (c > 999) {
+                    continue
+                }
+                judge(a, b, c)
+            }
+        }
     }
 
+    function judge(a, b, c) {
+        let num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        let temp = split(a)
+        num[temp[0]] = 0
+        num[temp[1]] = 0 
+        num[temp[2]] = 0
+        let temp3 = split(b)
+        if (temp3[0] == temp3[1] || temp3[0] == temp3[3] || temp3[0] == temp3[2]) {
+            return
+        }
+        if (num[temp3[0]] == 0 || num[temp3[1]] == 0 || num[temp3[2]] == 0) {
+            return
+        }
+        num[temp3[0]] = 0
+        num[temp3[1]] = 0 
+        num[temp3[2]] = 0
+        let temp2 = split(c)
+        if (temp2[0] == temp2[1] || temp2[0] == temp2[3] || temp2[0] == temp2[2]) {
+            return
+        }
+        if (num[temp2[0]] == 0 || num[temp2[1]] == 0 || num[temp2[2]] == 0) {
+            return
+        }
+        console.log(a, b, c)
+
+    }
+
+    function split(n) {
+        a = Math.floor(n / 100)
+        b = Math.floor((n - a * 100) / 10)
+        c = n % 10
+        return [a, b, c]
+    }
 })();

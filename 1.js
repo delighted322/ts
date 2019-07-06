@@ -828,4 +828,307 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
-}); })();
+}); });
+//2.16一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在第10次落地时，共经过多少米？第10次反弹多高？
+(function () {
+    var pass = 100;
+    var height = 50;
+    for (var i = 0; i < 9; i++) {
+        pass += height * 2;
+        height /= 2;
+    }
+    console.log(pass, height);
+});
+//2.17有一天，无聊的小明从1开始数数，同时在纸上写下每个数的个位数字。因为他非常热爱直角三角形，所以在纸上写下的数字按照直角三角形排列。
+//现在告诉你他写了N行数字，要求你打出这些数字。提示:print(‘xx’,end=‘’)是不换行，print(‘’)是换行
+// 举例：N=5
+// 1
+// 23
+// 456
+// 7890
+// 12345
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, num, str, i, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                num = 1;
+                str = "";
+                for (i = 1; i <= N; i++) {
+                    str = "";
+                    for (j = 1; j <= i; j++) {
+                        str = str + num + " ";
+                        num += 1;
+                        if (num == 10) {
+                            num = 0;
+                        }
+                    }
+                    console.log(str);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.18有一分数序列：2/1，3/2，5/3，8/5，13/8，21/13...求出这个数列的前n项之和并保留两位小数。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function fibonacci(n) {
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+    function sum(n) {
+        var result = 0;
+        for (var i = 1; i <= n; i++) {
+            result += fibonacci(i + 1) / fibonacci(i);
+        }
+        console.log(result);
+    }
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                sum(N);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.1输入三个自然数M、N和P,打印它们三个当中最小的那个
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, P, _c, min;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 1:
+                M = _a.apply(void 0, [_d.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 2:
+                N = _b.apply(void 0, [_d.sent()]);
+                _c = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数P: ")];
+            case 3:
+                P = _c.apply(void 0, [_d.sent()]);
+                if (M < N) {
+                    min = M < P ? M : P;
+                }
+                else {
+                    min = N < P ? N : P;
+                }
+                console.log(min);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.2输入三个自然数M、N和P,按照从大到小的顺序打印这三个数。
+//TODO 相等的情况还没考虑
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, P, _c, str, min, max, middle, array, _i, array_1, i;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 1:
+                M = _a.apply(void 0, [_d.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 2:
+                N = _b.apply(void 0, [_d.sent()]);
+                _c = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数P: ")];
+            case 3:
+                P = _c.apply(void 0, [_d.sent()]);
+                str = "";
+                if (M < N) {
+                    min = M < P ? M : P;
+                    max = N > P ? N : P;
+                }
+                else {
+                    min = N < P ? N : P;
+                    max = M > P ? M : P;
+                }
+                array = [M, N, P];
+                for (_i = 0, array_1 = array; _i < array_1.length; _i++) {
+                    i = array_1[_i];
+                    if (i < max && i > min) {
+                        middle = i;
+                    }
+                }
+                str = str + max + " " + middle + " " + min;
+                console.log(str);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.3对于一个任意的三位自然数x，编程计算其各个数位上的数字之和
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var X, _a, a, b, c;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个任意的三位自然数X: ")];
+            case 1:
+                X = _a.apply(void 0, [_b.sent()]);
+                a = X % 10;
+                b = Math.floor(X % 100 / 10);
+                c = Math.floor(X / 100);
+                console.log(c + b + a);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.4输入一个三位自然数，然后把这个数倒序输出，注意输出中不要有前置0的存在
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var X, _a, a, b, c;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个任意的三位自然数X: ")];
+            case 1:
+                X = _a.apply(void 0, [_b.sent()]);
+                a = X % 10;
+                b = Math.floor(X % 100 / 10);
+                c = Math.floor(X / 100);
+                if (a == 0) {
+                    console.log("" + b + c);
+                }
+                else {
+                    console.log("" + a + b + c);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.5任意输入一个三位整数，再把它的次序打乱重新组合一个新的三位整数，使其值最大
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var X, _a, a, b, c, str;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个任意的三位自然数X: ")];
+            case 1:
+                X = _a.apply(void 0, [_b.sent()]);
+                a = X % 10;
+                b = Math.floor(X % 100 / 10);
+                c = Math.floor(X / 100);
+                str = "";
+                if (a > b) {
+                    if (a > c) {
+                        str += a;
+                        if (b > c) {
+                            str += "" + b + c;
+                        }
+                        else {
+                            str += "" + c + b;
+                        }
+                    }
+                    else {
+                        str += c;
+                        if (a > b) {
+                            str += "" + a + b;
+                        }
+                        else {
+                            str += "" + b + a;
+                        }
+                    }
+                }
+                else {
+                    if (b > c) {
+                        str += b;
+                        if (a > c) {
+                            str += "" + a + c;
+                        }
+                        else {
+                            str += "" + c + a;
+                        }
+                    }
+                    else {
+                        str += c;
+                        if (a > b) {
+                            str += "" + a + b;
+                        }
+                        else {
+                            str += "" + b + a;
+                        }
+                    }
+                }
+                console.log(str);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.6 1，2 .... 9组成三个三位数，每个三位数中的数字不可重复（例如112，131等），使这三个三位数构成1 ：2 ：3的比例，求出所有满足条件的三个三位数
+(function () {
+    var a = 0;
+    var b = 0;
+    var c = 0;
+    for (var i = 1; i < 4; i++) {
+        for (var j = 1; j < 10; j++) {
+            if (i == j) {
+                continue;
+            }
+            for (var z = 1; z < 10; z++) {
+                if (z == i || z == j) {
+                    continue;
+                }
+                a = i * 100 + j * 10 + z;
+                b = 2 * a;
+                c = 3 * a;
+                if (c > 999) {
+                    continue;
+                }
+                // console.log(a, b, c)
+                judge(a, b, c);
+            }
+        }
+    }
+    function judge(a, b, c) {
+        var num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var temp = split(a);
+        num[temp[0]] = 0;
+        num[temp[1]] = 0;
+        num[temp[2]] = 0;
+        var temp3 = split(b);
+        if (temp3[0] == temp3[1] || temp3[0] == temp3[3] || temp3[0] == temp3[2]) {
+            return;
+        }
+        if (num[temp3[0]] == 0 || num[temp3[1]] == 0 || num[temp3[2]] == 0) {
+            return;
+        }
+        num[temp3[0]] = 0;
+        num[temp3[1]] = 0;
+        num[temp3[2]] = 0;
+        var temp2 = split(c);
+        if (temp2[0] == temp2[1] || temp2[0] == temp2[3] || temp2[0] == temp2[2]) {
+            return;
+        }
+        if (num[temp2[0]] == 0 || num[temp2[1]] == 0 || num[temp2[2]] == 0) {
+            return;
+        }
+        console.log(a, b, c);
+    }
+    // judge(123,356,789)
+    function split(n) {
+        a = Math.floor(n / 100);
+        b = Math.floor((n - a * 100) / 10);
+        c = n % 10;
+        return [a, b, c];
+    }
+})();

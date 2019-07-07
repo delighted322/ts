@@ -1075,6 +1075,7 @@ var utils_1 = require("./utils");
     });
 }); });
 //3.6 1，2 .... 9组成三个三位数，每个三位数中的数字不可重复（例如112，131等），使这三个三位数构成1 ：2 ：3的比例，求出所有满足条件的三个三位数
+// TODO 要简化
 (function () {
     var a = 0;
     var b = 0;
@@ -1094,7 +1095,6 @@ var utils_1 = require("./utils");
                 if (c > 999) {
                     continue;
                 }
-                // console.log(a, b, c)
                 judge(a, b, c);
             }
         }
@@ -1124,11 +1124,109 @@ var utils_1 = require("./utils");
         }
         console.log(a, b, c);
     }
-    // judge(123,356,789)
     function split(n) {
         a = Math.floor(n / 100);
         b = Math.floor((n - a * 100) / 10);
         c = n % 10;
         return [a, b, c];
+    }
+});
+//3.7 给出一个数字N，求N的阶乘，其右边有多少个连续的零。例如5！= 120，其右边有1个零
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function factorial(n) {
+        if (n == 1) {
+            return 1;
+        }
+        return factorial(n - 1) * n;
+    }
+    var N, _a, result, i, count;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                result = factorial(N);
+                i = 10;
+                count = 0;
+                while (result % i == 0) {
+                    count += 1;
+                    i *= 10;
+                }
+                console.log(count);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.8 奶牛们在玩一个数字游戏，它们从一个四位整数开始，比如：6593。
+//将这个整数中的各位数字全部取出，将他们相乘，得到一个新的整数，上面的例子就是6 * 5 * 9 * 3 = 810，然后继续做下去，8 * 1 * 0 = 0得到了一个个位数0。
+//帮助奶牛完成这个游戏，读入一个四位数n并计算出得到一个个位数的过程。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, str, splited, _i, splited_1, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个四位数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                str = "";
+                splited = [];
+                while (N >= 10) {
+                    str = String(N);
+                    splited = str.split("");
+                    N = 1;
+                    for (_i = 0, splited_1 = splited; _i < splited_1.length; _i++) {
+                        i = splited_1[_i];
+                        N *= Number(i);
+                    }
+                }
+                console.log(N);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.9 1-N(N最大为三位数）的所有整数中，数字x一共出现了多少次？例如1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11，1出现了4次
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, X, _b, count, str, splited, i, _i, splited_2, j;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数X: ")];
+            case 2:
+                X = _b.apply(void 0, [_c.sent()]);
+                count = 0;
+                str = "";
+                splited = [];
+                for (i = 1; i <= N; i++) {
+                    splited = String(i).split("");
+                    for (_i = 0, splited_2 = splited; _i < splited_2.length; _i++) {
+                        j = splited_2[_i];
+                        if (X == Number(j)) {
+                            count++;
+                        }
+                    }
+                }
+                console.log(count);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.10 有1,2,3,4这4个数字，能组成哪些互不相同且无重复数字的三位数？请输出
+(function () {
+    for (var i = 1; i <= 4; i++) {
+        for (var j = 1; j <= 4; j++) {
+            for (var z = 1; z <= 4; z++) {
+                if (i != j && i != z && j != z) {
+                    console.log(i * 100 + j * 10 + z);
+                }
+            }
+        }
     }
 })();

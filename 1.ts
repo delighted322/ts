@@ -635,4 +635,75 @@ import {input} from './utils'
         c = n % 10
         return [a, b, c]
     }
-})();
+});
+
+//3.7 给出一个数字N，求N的阶乘，其右边有多少个连续的零。例如5！= 120，其右边有1个零
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    function factorial(n: number) { //number和Number 区别 这里写Number下面会报错
+        if (n == 1) {
+            return 1
+        }
+        return factorial(n - 1) * n
+    }
+    let result = factorial(N)
+
+    let i = 10
+    let count = 0
+    while(result % i == 0) {
+        count += 1
+        i *= 10
+    }
+    console.log(count)
+});
+
+//3.8 奶牛们在玩一个数字游戏，它们从一个四位整数开始，比如：6593。
+//将这个整数中的各位数字全部取出，将他们相乘，得到一个新的整数，上面的例子就是6 * 5 * 9 * 3 = 810，然后继续做下去，8 * 1 * 0 = 0得到了一个个位数0。
+//帮助奶牛完成这个游戏，读入一个四位数n并计算出得到一个个位数的过程。
+(async() => {
+    let N = Number(await input("输入一个四位数N: "))
+    let str = ""
+    let splited = []
+    while (N >= 10) {
+        str = String(N)
+        splited = str.split("")
+        N = 1
+        for (let i of splited) {
+            N *= Number(i)
+        }
+    }
+    console.log(N)
+});
+
+//3.9 1-N(N最大为三位数）的所有整数中，数字x一共出现了多少次？例如1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11，1出现了4次
+(async() => {
+    let N = Number(await input("输入一个自然数N: "))
+    let X = Number(await input("输入一个自然数X: "))
+    let count = 0
+    let str = ""
+    let splited = []
+    for (let i = 1; i <= N; i++) {
+        splited = String(i).split("")
+        for (let j of splited) {
+            if (X == Number(j)) {
+                count ++
+            }
+        }
+    }
+    console.log(count)
+});
+
+//3.10 有1,2,3,4这4个数字，能组成哪些互不相同且无重复数字的三位数？请输出
+(() => {
+    for (let i = 1; i <=4; i++) {
+        for(let j = 1; j <= 4; j++) {
+            for (let z = 1; z <= 4; z++) {
+                if (i != j && i != z && j != z) {
+                    console.log(i * 100 + j * 10 + z)
+                }
+            }
+        }
+    }
+});
+
+//3.11 求一个整数n以内的所有素数。

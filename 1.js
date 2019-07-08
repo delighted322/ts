@@ -1229,4 +1229,377 @@ var utils_1 = require("./utils");
             }
         }
     }
-})();
+});
+//3.11 求一个整数n以内的所有素数。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function isPrime(n) {
+        var flag = true;
+        for (var i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false;
+                return flag;
+            }
+        }
+        return flag;
+    }
+    var N, _a, str, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                str = "";
+                for (i = 2; i <= N; i++) {
+                    if (isPrime(i)) {
+                        str += i + " ";
+                    }
+                }
+                console.log(str);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.12 纯粹素数是这样定义的：一个素数，去掉最高位，剩下的数仍为素数，再去掉剩下的数的最高位，余下的数还是素数。
+//这样下去一直到最后剩下的个位数也还是素数。求出所有小于 N（四位数）的四位的纯粹素数。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function remove(n) {
+        var splited = String(n).split("");
+        var index = Math.pow(10, splited.length - 2);
+        var result = 0;
+        for (var i = 1; i < splited.length; i++) {
+            result += Number(splited[i]) * index;
+            index /= 10;
+        }
+        return result;
+    }
+    function isPrime(n) {
+        var flag = true;
+        for (var i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false;
+                return flag;
+            }
+        }
+        return flag;
+    }
+    var N, _a, i, help;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个四位数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                for (i = 1001; i <= N; i++) {
+                    help = i;
+                    while (isPrime(help)) {
+                        if (help < 10) {
+                            console.log(i);
+                            break; //return不对 因为return会直接结束整个方法，不管这个return在多少层循环之内
+                        }
+                        help = remove(help);
+                    }
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.13 在质数的大家庭中，大小之差不超过2的两个质数称它俩为一对孪生素数，如2和3、3和5、17和19等等。
+//请你统计一下，在不大于自然数N的质数中，孪生素数的对数。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function isPrime(n) {
+        var flag = true;
+        for (var i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false;
+                return flag;
+            }
+        }
+        return flag;
+    }
+    var N, _a, array, count, i, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                array = [];
+                count = 0;
+                for (i = 2; i <= N; i++) {
+                    if (isPrime(i)) {
+                        array.push(i);
+                    }
+                }
+                console.log(array);
+                for (i = 0; i < array.length - 1; i++) {
+                    if ((array[i + 1] - array[i]) <= 2) {
+                        console.log(array[i], array[i + 1]);
+                        count += 1;
+                    }
+                }
+                console.log("共", count, "对孪生素数");
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.14 给一个数，能够分解成两个素数的和。现在要给你一个n，6 <= n < 1000000，让你求他会分解成多少对素数（全都输出）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function isPrime(n) {
+        var flag = true;
+        if (n == 1) {
+            return false;
+        }
+        for (var i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false;
+                return flag;
+            }
+        }
+        return flag;
+    }
+    var N, _a, count, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                count = 0;
+                for (i = 2; i < N / 2; i++) {
+                    if (isPrime(i) && isPrime(N - i)) {
+                        count += 1;
+                        console.log(i, N - i);
+                    }
+                }
+                console.log("能分解成", count, "对素数");
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.15 一个数如果恰好等于它的因子（包括1不包括本身）之和，这个数就称为“完数”。例如6=1＋2＋3.编程 找出1000以内的所有完数
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function findAll(N) {
+        for (var i = 1; i < N; i++) {
+            if (isPerfectNumber(i)) {
+                console.log(i);
+            }
+        }
+    }
+    function isPerfectNumber(n) {
+        var factor = listFactor(n);
+        var sum = 0;
+        for (var _i = 0, factor_1 = factor; _i < factor_1.length; _i++) {
+            var i = factor_1[_i];
+            sum += i;
+        }
+        if (sum == n) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    function listFactor(n) {
+        var factor = [];
+        for (var i = 1; i < n; i++) {
+            if (n % i == 0) {
+                factor.push(i);
+            }
+        }
+        return factor;
+    }
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                findAll(N);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.16桐桐把一个自然数N的正因子个数记为F（N），例如18的所有正因子为1,2,3,6,9,18，所以F（18）= 6。
+//现在给出K，输入K，求出满足 F（N）= K 最小的数
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function countFactor(N) {
+        var count = 0;
+        for (var i = 1; i <= N; i++) {
+            if (N % i == 0) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+    var K, _a, N;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数K: ")];
+            case 1:
+                K = _a.apply(void 0, [_b.sent()]);
+                N = 1;
+                while (countFactor(N) != K) {
+                    N += 1;
+                }
+                console.log(N);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.17 任意输入一正整数N，求出它的所有质因子。如：10 =（2 5）; 20 =（2 2 5）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function findPrimeFactor(N) {
+        var str = "";
+        while (N != 1) {
+            for (var i = 2; i <= N; i++) {
+                if (N % i == 0) {
+                    str += i + " ";
+                    N /= i;
+                    break;
+                }
+            }
+        }
+        return str;
+    }
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                console.log(findPrimeFactor(N));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.18 猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个，第二天早上又将剩下的桃子吃掉一半，又多吃了一个。
+//以后每天早上都吃了前一天剩下的一半零一个。到第n天早上想再吃时，见只剩下一个桃子了，求第一天共摘了多少。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function count(n) {
+        if (n == 1) {
+            return 1;
+        }
+        return (count(n - 1) + 1) * 2;
+    }
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                console.log(count(N));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.19 国王将金币作为工资，发放给忠诚的骑士。第1天，骑士收到一枚金币；之后两天(第2天和第3天)里，每天收到两枚金币；
+//之后三天(第4、5、6天)里，每天收到三枚金币；之后四天(第7、8、9、10天)里，每天收到四枚金币……这种工资发放模式会一直这样延续下去,
+//你需要编写一个程序，确定从第一天开始到N天时，骑士一共获得了多少金币？
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, salary, index, sum, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                salary = 1;
+                index = 1;
+                sum = 0;
+                for (i = 1; i <= N; i++) {
+                    if (index > salary) {
+                        salary++;
+                        index = 1;
+                    }
+                    sum += salary;
+                    index++;
+                }
+                console.log(sum);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.20 老王去酒馆喝酒，他一共带了N（N>30)元，酒馆里每瓶酒3元，喝完后回收可获得1元，请问老王用这些钱最多可以喝多少瓶酒？
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function countAndRest(n) {
+        var count = Math.floor(n / 3);
+        var rest = n - count * 3;
+        return [count, rest];
+    }
+    var N, _a, count, array;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                count = 0;
+                while (N >= 3) {
+                    array = countAndRest(N);
+                    count += array[0];
+                    N = array[1] + array[0];
+                }
+                console.log(count);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//3.21 李白提壶上街买酒、喝酒，每次遇到酒店，便将壶中的酒量增添一倍，而每次见到花，便喝酒一斤，这样他遇店、见花经过n次，正好把酒全喝完了。
+//问：壶中原有多少斤酒？
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function rollback(n) {
+        return (n + 1) / 2;
+    }
+    var N, _a, count, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                count = 0;
+                for (i = 1; i <= N; i++) {
+                    count = rollback(count);
+                }
+                console.log(count);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.1 给定一个包含n个正整数的序列，你需要判断这个序列中的最大值是否唯一，如果是，输出次大值，否则输出最大值的出现次数。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, array, i, num;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                array = [];
+                for (i = 0; i < N; i++) {
+                    num = Math.floor(Math.random() * 100) //Math.random()  [0,1)
+                    ;
+                    array.push(num);
+                }
+                console.log(array);
+                return [2 /*return*/];
+        }
+    });
+}); })();

@@ -707,3 +707,284 @@ import {input} from './utils'
 });
 
 //3.11 求一个整数n以内的所有素数。
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+
+    function isPrime(n : number) {
+        let flag = true
+        for (let i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false
+                return flag
+            }
+        }
+        return flag
+    }
+
+    let str = ""
+    for (let i = 2; i <= N; i++) {
+        if (isPrime(i)) {
+            str += i + " "
+        }
+    }
+    console.log(str)
+});
+
+//3.12 纯粹素数是这样定义的：一个素数，去掉最高位，剩下的数仍为素数，再去掉剩下的数的最高位，余下的数还是素数。
+//这样下去一直到最后剩下的个位数也还是素数。求出所有小于 N（四位数）的四位的纯粹素数。
+(async () => {
+    let N = Number(await input("输入一个四位数N: "))
+    for (let i = 1001; i <= N; i++) {
+        let help = i
+        while (isPrime(help)) {
+            if (help < 10) {
+                console.log(i)
+                break  //return不对 因为return会直接结束整个方法，不管这个return在多少层循环之内
+            }
+            help = remove(help)
+        }
+    }
+
+    function remove(n : number) {
+        let splited = String(n).split("")
+        let index = Math.pow(10, splited.length - 2)
+        let result = 0
+        for (let i = 1; i < splited.length; i++) {
+            result += Number(splited[i]) * index
+            index /= 10
+        }
+        return result
+    }
+
+    function isPrime(n : number) {
+        let flag = true
+        for (let i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false
+                return flag
+            }
+        }
+        return flag
+    }
+});
+
+//3.13 在质数的大家庭中，大小之差不超过2的两个质数称它俩为一对孪生素数，如2和3、3和5、17和19等等。
+//请你统计一下，在不大于自然数N的质数中，孪生素数的对数。
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let array = []
+    let count = 0
+
+    for (let i = 2; i <= N; i++) {
+        if (isPrime(i)) {
+            array.push(i)
+        }
+    }
+    console.log(array)
+    for (let i = 0; i < array.length - 1; i++) {
+        if ((array[i + 1] - array[i]) <= 2) {
+            console.log(array[i], array[i + 1])
+            count += 1
+        }
+    }
+    console.log("共", count, "对孪生素数")
+
+    function isPrime(n : number) {
+        let flag = true
+        for (let i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false
+                return flag
+            }
+        }
+        return flag
+    }
+});
+
+//3.14 给一个数，能够分解成两个素数的和。现在要给你一个n，6 <= n < 1000000，让你求他会分解成多少对素数（全都输出）
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let count = 0
+    for (let i = 2; i < N / 2; i++) {
+        if (isPrime(i) && isPrime(N - i)) {
+            count += 1
+            console.log(i, N - i)
+        }
+    }
+    console.log("能分解成",count, "对素数")
+
+    function isPrime(n : number) {
+        let flag = true
+        if (n == 1) {
+            return false
+        }
+        for (let i = 2; i < n; i++) {
+            if (n % i == 0) {
+                flag = false
+                return flag
+            }
+        }
+        return flag
+    }
+});
+
+//3.15 一个数如果恰好等于它的因子（包括1不包括本身）之和，这个数就称为“完数”。例如6=1＋2＋3.编程 找出1000以内的所有完数
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    findAll(N)
+
+    function findAll(N : number) {
+        for (let i = 1; i < N; i++) {
+            if (isPerfectNumber(i)) {
+                console.log(i)
+            }
+        }
+    }
+
+    function isPerfectNumber(n : number) {
+        let factor = listFactor(n)
+        let sum = 0
+        for (let i of factor) {
+            sum += i
+        }
+        if (sum == n) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    function listFactor(n : number) {
+        let factor = []
+        for (let i = 1; i < n; i++) {
+            if (n % i ==0) {
+                factor.push(i)
+            }
+        }
+        return factor
+    }
+});
+
+//3.16桐桐把一个自然数N的正因子个数记为F（N），例如18的所有正因子为1,2,3,6,9,18，所以F（18）= 6。
+//现在给出K，输入K，求出满足 F（N）= K 最小的数
+(async () => {
+    let K = Number(await input("输入一个自然数K: "))
+    let N = 1
+
+    while (countFactor(N) != K) {
+        N += 1
+    }
+    console.log(N)
+
+    function countFactor(N : number) {
+        let count = 0
+        for (let i = 1; i <= N; i++) {
+            if (N % i == 0) {
+                count += 1
+            }
+        }
+        return count
+    }
+});
+
+//3.17 任意输入一正整数N，求出它的所有质因子。如：10 =（2 5）; 20 =（2 2 5）
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    console.log(findPrimeFactor(N))
+
+    function findPrimeFactor(N : number) {
+        let str = ""
+        while (N != 1) {
+            for (let i = 2; i <= N; i++) {
+                if (N % i == 0) {
+                    str += i + " "
+                    N /= i
+                    break
+                }
+            }
+        }
+        return str
+    }
+});
+
+//3.18 猴子吃桃问题：猴子第一天摘下若干个桃子，当即吃了一半，还不瘾，又多吃了一个，第二天早上又将剩下的桃子吃掉一半，又多吃了一个。
+//以后每天早上都吃了前一天剩下的一半零一个。到第n天早上想再吃时，见只剩下一个桃子了，求第一天共摘了多少。
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    console.log(count(N))
+
+    function count(n : number) {
+        if (n == 1) {
+            return 1
+        }
+        return (count(n - 1) + 1) * 2
+    }
+});
+
+//3.19 国王将金币作为工资，发放给忠诚的骑士。第1天，骑士收到一枚金币；之后两天(第2天和第3天)里，每天收到两枚金币；
+//之后三天(第4、5、6天)里，每天收到三枚金币；之后四天(第7、8、9、10天)里，每天收到四枚金币……这种工资发放模式会一直这样延续下去,
+//你需要编写一个程序，确定从第一天开始到N天时，骑士一共获得了多少金币？
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let salary = 1
+    let index = 1
+    let sum = 0
+    for (let i = 1; i <= N; i++) {
+        if (index > salary) {
+            salary ++
+            index = 1
+        }
+        sum += salary
+        index ++
+    }
+    console.log(sum)
+});
+
+//3.20 老王去酒馆喝酒，他一共带了N（N>30)元，酒馆里每瓶酒3元，喝完后回收可获得1元，请问老王用这些钱最多可以喝多少瓶酒？
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let count = 0
+
+    while (N >= 3) {
+        let array = countAndRest(N)
+        count += array[0]
+        N = array[1] + array[0]
+    }
+    console.log(count)
+
+    function countAndRest(n : number) {
+        let count = Math.floor(n / 3)
+        let rest  = n - count * 3
+        return [count, rest]
+    }
+});
+
+//3.21 李白提壶上街买酒、喝酒，每次遇到酒店，便将壶中的酒量增添一倍，而每次见到花，便喝酒一斤，这样他遇店、见花经过n次，正好把酒全喝完了。
+//问：壶中原有多少斤酒？
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let count = 0
+    for (let i = 1; i <= N; i++) {
+        count = rollback(count)
+    }
+    console.log(count)
+
+    function rollback(n : number) { //经过一个酒店和花之后有n斤酒 返回的是 遇见店和花之前有多少酒
+        return (n + 1) / 2
+    }
+});
+
+//4.1 给定一个包含n个正整数的序列，你需要判断这个序列中的最大值是否唯一，如果是，输出次大值，否则输出最大值的出现次数。
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let array = []
+
+    for (let i = 0; i < N; i++) {
+        let num = Math.floor(Math.random() * 100)  //Math.random()  [0,1)
+        array.push(num)
+    }
+    console.log(array)
+
+    let max = array[0]
+    let count = 0
+})();

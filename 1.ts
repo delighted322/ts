@@ -980,11 +980,43 @@ import {input} from './utils'
     let array = []
 
     for (let i = 0; i < N; i++) {
-        let num = Math.floor(Math.random() * 100)  //Math.random()  [0,1)
+        let num = Math.floor(Math.random() * 10)  //Math.random()  [0,1)
         array.push(num)
     }
     console.log(array)
 
-    let max = array[0]
-    let count = 0
+    let max = -1
+    let count = 1
+    let second = -1
+    for (let i = 1; i < array.length; i++) {
+        if (array[i] == max) {
+            count ++
+        }
+        if (array[i] > max) {
+            second = max
+            max = array[i]
+            count = 1
+        }
+    }
+    if (count == 1) {
+        console.log("次大数为：", second)
+    } else {
+        console.log("最大值出现", count, "次")
+    }
+});
+
+//4.2 给定一个包含 n 个正整数的序列，去掉里面重复的值，然后输出
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let array = []
+
+    for (let i = 0; i < N; i++) {
+        let num = Math.floor(Math.random() * 10)  //Math.random()  [0,1)
+        array.push(num)
+    }
+    console.log(array)
+
+    for (let i = 0; i < array.length; i++) {
+        
+    }
 })();

@@ -1584,6 +1584,46 @@ var utils_1 = require("./utils");
 }); });
 //4.1 给定一个包含n个正整数的序列，你需要判断这个序列中的最大值是否唯一，如果是，输出次大值，否则输出最大值的出现次数。
 (function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, array, i, num, max, count, second, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                array = [];
+                for (i = 0; i < N; i++) {
+                    num = Math.floor(Math.random() * 10) //Math.random()  [0,1)
+                    ;
+                    array.push(num);
+                }
+                console.log(array);
+                max = -1;
+                count = 1;
+                second = -1;
+                for (i = 1; i < array.length; i++) {
+                    if (array[i] == max) {
+                        count++;
+                    }
+                    if (array[i] > max) {
+                        second = max;
+                        max = array[i];
+                        count = 1;
+                    }
+                }
+                if (count == 1) {
+                    console.log("次大数为：", second);
+                }
+                else {
+                    console.log("最大值出现", count, "次");
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.2 给定一个包含 n 个正整数的序列，去掉里面重复的值，然后输出
+(function () { return __awaiter(_this, void 0, void 0, function () {
     var N, _a, array, i, num;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -1594,10 +1634,12 @@ var utils_1 = require("./utils");
                 N = _a.apply(void 0, [_b.sent()]);
                 array = [];
                 for (i = 0; i < N; i++) {
-                    num = Math.floor(Math.random() * 100) //Math.random()  [0,1)
+                    num = Math.floor(Math.random() * 10) //Math.random()  [0,1)
                     ;
                     array.push(num);
                 }
+                console.log(array);
+                array.pop();
                 console.log(array);
                 return [2 /*return*/];
         }

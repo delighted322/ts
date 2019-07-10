@@ -1624,7 +1624,7 @@ var utils_1 = require("./utils");
 }); });
 //4.2 给定一个包含 n 个正整数的序列，去掉里面重复的值，然后输出
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var N, _a, array, i, num;
+    var N, _a, array, i, num, i, j, temp;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -1639,8 +1639,130 @@ var utils_1 = require("./utils");
                     array.push(num);
                 }
                 console.log(array);
-                array.pop();
+                for (i = 1; i < array.length; i++) {
+                    for (j = 0; j < i; j++) {
+                        if (array[j] == array[i]) {
+                            temp = array[i];
+                            array[i] = array[array.length - 1];
+                            array[array.length - 1] = temp;
+                            array.pop();
+                        }
+                    }
+                }
                 console.log(array);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.3 给定一个包含n个正整数的序列，将其进行排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, array, i, num, i, min, j, t;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                array = [];
+                for (i = 0; i < N; i++) {
+                    num = Math.floor(Math.random() * 10) //Math.random()  [0,1)
+                    ;
+                    array.push(num);
+                }
+                console.log(array);
+                for (i = 0; i < array.length; i++) {
+                    min = i;
+                    for (j = i; j < array.length; j++) {
+                        if (array[j] < array[min]) {
+                            min = j;
+                        }
+                    }
+                    t = array[i];
+                    array[i] = array[min];
+                    array[min] = t;
+                }
+                console.log(array);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.4 输入两个年份月份与日期，计算这两个日期间隔多少天
+// TODO
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var Y1, _a, M1, _b, D1, _c, Y2, _d, M2, _e, D2, _f;
+    return __generator(this, function (_g) {
+        switch (_g.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入年份: ")];
+            case 1:
+                Y1 = _a.apply(void 0, [_g.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入月份: ")];
+            case 2:
+                M1 = _b.apply(void 0, [_g.sent()]);
+                _c = Number;
+                return [4 /*yield*/, utils_1.input("输入日期: ")];
+            case 3:
+                D1 = _c.apply(void 0, [_g.sent()]);
+                _d = Number;
+                return [4 /*yield*/, utils_1.input("输入年份: ")];
+            case 4:
+                Y2 = _d.apply(void 0, [_g.sent()]);
+                _e = Number;
+                return [4 /*yield*/, utils_1.input("输入月份: ")];
+            case 5:
+                M2 = _e.apply(void 0, [_g.sent()]);
+                _f = Number;
+                return [4 /*yield*/, utils_1.input("输入日期: ")];
+            case 6:
+                D2 = _f.apply(void 0, [_g.sent()]);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.5 有M个人，其编号分别为1－M。这M个人按顺序排成一个圈。
+//现在给定一个数N，从第一个人开始依次报数，数到N的人出列，然后又从下一个人开始又从1开始依次报数，数到N的人又出列．如此循环，直到最后一个人出列为止
+//例如：M=8 ,N=2,输出2，4，6，8，3，7，4，5，1   
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, array, i, count, index, str, i;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                array = [];
+                for (i = 0; i <= M; i++) {
+                    array[i] = i;
+                }
+                console.log(array);
+                count = 0;
+                index = 1;
+                str = "";
+                while (count < M) {
+                    for (i = 1; i <= M; i++) {
+                        if (array[i] == 0) {
+                            continue;
+                        }
+                        if (array[i] != 0 && index == N) {
+                            str += array[i] + " ";
+                            count++;
+                            array[i] = 0;
+                        }
+                        index++;
+                        if (index == N + 1) {
+                            index = 1;
+                        }
+                    }
+                }
+                console.log(str);
                 return [2 /*return*/];
         }
     });

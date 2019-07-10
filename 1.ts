@@ -1016,7 +1016,92 @@ import {input} from './utils'
     }
     console.log(array)
 
-    for (let i = 0; i < array.length; i++) {
-        
+    for (let i = 1; i < array.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (array[j] == array[i]) {
+                let temp = array[i]
+                array[i] = array[array.length - 1]
+                array[array.length - 1] = temp
+                array.pop()
+            }
+        }
     }
+    console.log(array)
+});
+
+//4.3 给定一个包含n个正整数的序列，将其进行排序
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let array = []
+
+    for (let i = 0; i < N; i++) {
+        let num = Math.floor(Math.random() * 10)  //Math.random()  [0,1)
+        array.push(num)
+    }
+    console.log(array)
+
+    for (let i = 0; i < array.length; i++) {
+        let min = i
+        for (let j = i; j < array.length; j++) {
+            if (array[j] < array[min]) {
+                min = j
+            }
+        }
+        let t = array[i]
+        array[i] = array[min]
+        array[min] = t
+    }
+    console.log(array)
+});
+
+//4.4 输入两个年份月份与日期，计算这两个日期间隔多少天
+// TODO
+(async () => {
+    let Y1 = Number(await input("输入年份: "))
+    let M1 = Number(await input("输入月份: "))
+    let D1 = Number(await input("输入日期: "))
+    let Y2 = Number(await input("输入年份: "))
+    let M2 = Number(await input("输入月份: "))
+    let D2 = Number(await input("输入日期: "))
+
+});
+
+//4.5 有M个人，其编号分别为1－M。这M个人按顺序排成一个圈。
+//现在给定一个数N，从第一个人开始依次报数，数到N的人出列，然后又从下一个人开始又从1开始依次报数，数到N的人又出列．如此循环，直到最后一个人出列为止
+//例如：M=8 ,N=2,输出2，4，6，8，3，7，4，5，1   
+(async () => {
+    let M = Number(await input("输入一个自然数M: "))
+    let N = Number(await input("输入一个自然数N: "))
+    let array = []
+    for (let i = 0; i <= M; i++) {
+        array[i] = i
+    }
+    console.log(array)
+
+    let count = 0
+    let index = 1
+    let str = ""
+    while (count < M) {
+        for (let i = 1; i <= M; i++) {
+            if (array[i] == 0) {
+                continue
+            }
+            if (array[i] != 0 && index == N) {
+                str += array[i] + " "
+                count++
+                array[i] = 0
+            }
+            index++
+            if (index == N + 1) {
+                index = 1
+            }
+        }
+    }
+    console.log(str)
+});
+
+//4.6 有a盏灯，编号为1N,第一个人把所有灯打开，第二个人按下所有编号为2的倍数的开关。
+//第三个人按下所有编号为三的倍数的开关，依此类推，一共有k个人，问最后有哪些灯开着。
+(async () => {
+
 })();

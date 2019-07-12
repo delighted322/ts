@@ -1766,4 +1766,272 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
+}); });
+//4.6 有a盏灯，编号为1N,第一个人把所有灯打开，第二个人按下所有编号为2的倍数的开关。
+//第三个人按下所有编号为三的倍数的开关，依此类推，一共有k个人，问最后有哪些灯开着。
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var A, _a, K, _b, N, i, i, j;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数A: ")];
+            case 1:
+                A = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数K: ")];
+            case 2:
+                K = _b.apply(void 0, [_c.sent()]);
+                N = [];
+                for (i = 0; i <= A; i++) {
+                    N.push(false);
+                }
+                console.log(N);
+                for (i = 1; i <= K; i++) {
+                    for (j = i; j <= A; j += i) {
+                        N[j] = N[j] == true ? false : true;
+                    }
+                }
+                console.log(N);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.7 输入N,根据N的大小创建一个回型方阵
+// 例如：
+// N=3
+// 输出：
+// 3 3 3 3 3 3 3
+// 3 2 2 2 2 2 3
+// 3 2 1 1 1 2 3
+// 3 2 1 0 1 2 3
+// 3 2 1 1 1 2 3
+// 3 2 2 2 2 2 3
+// 3 3 3 3 3 3 3
+// TODO
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function distance(a, b) {
+        return Math.sqrt(Math.pow((a[0] - b[0]), 2) + Math.pow((a[1] - b[1]), 2));
+    }
+    var N, _a, array, i, j, x, y, i, str, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                array = [];
+                for (i = 0; i < 2 * N + 1; i++) {
+                    array.push([]);
+                    for (j = 0; j < 2 * N + 1; j++) {
+                        x = Math.abs(j - N);
+                        y = Math.abs(i - N);
+                        array[i].push(x > y ? x : y);
+                    }
+                }
+                for (i = 0; i < array.length; i++) {
+                    str = "";
+                    for (j = 0; j < array[i].length; j++) {
+                        str += array[i][j] + " ";
+                    }
+                    console.log(str);
+                }
+                return [2 /*return*/];
+        }
+    });
 }); })();
+//4.8 输入一个n，制作一个n层的杨辉三角形：
+// 举例：输入n=6
+// 1
+// 1 1
+// 1 2 1
+// 1 3 3 1
+// 1 4 6 4 1
+// 1 5 10 10 5 1
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function yangTriangle(n, m) {
+        if (m == 1 || m == n) {
+            return 1;
+        }
+        return yangTriangle(n - 1, m - 1) + yangTriangle(n - 1, m);
+    }
+    var N, _a, i, str, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                for (i = 1; i <= N; i++) {
+                    str = "";
+                    for (j = 1; j <= i; j++) {
+                        str += yangTriangle(i, j) + " ";
+                    }
+                    console.log(str);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.9 有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月 后每个月又生一对兔子，假如兔子都不死，问N个月后的兔子总数为多少？
+//TODO  1 1 2 3 5 8 13
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.10 蓄水池有甲、丙两条进水管和乙、丁两条排水管。要灌满一池水，单开甲管需要5小时，单开丙管需要6小时；要排光一池水，单开乙管需要7小时，单开丁管需要8小时。
+//现在池内没有水，如果按甲乙丙丁的顺序循环单开各水管，每次每管开1小时，则多长时间后水开始溢出水池？
+(function () {
+    var sum = 24 * 35; //5 6 7 8的最小公倍数
+    var a = sum / 5; //甲
+    var b = sum / 7; //乙
+    var c = sum / 6; //丙
+    var d = sum / 8; //丁
+    var array = [a, -b, c, -d];
+    console.log(array);
+    var now = 0;
+    var hour = 0;
+    var index = 0;
+    while (now <= sum) {
+        now += array[index];
+        hour++;
+        index++;
+        if (index > 3) {
+            index = 0;
+        }
+    }
+    console.log(hour);
+});
+//4.11 输入m和n，以矩阵的形式输出一个n行m列的随机二维列表
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function randint(a, b) {
+        return a + Math.round(Math.random() * b);
+    }
+    var N, _a, M, _b, array, i, j, i, str, j;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 2:
+                M = _b.apply(void 0, [_c.sent()]);
+                array = [];
+                for (i = 0; i < N; i++) {
+                    array.push([]);
+                    for (j = 0; j < M; j++) {
+                        array[i].push(randint(0, 10));
+                    }
+                }
+                console.log(array);
+                for (i = 0; i < array.length; i++) {
+                    str = "";
+                    for (j = 0; j < array[i].length; j++) {
+                        str += array[i][j] + " ";
+                    }
+                    console.log(str);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.12 创建一个n行m列的随机二维列表，求出其中值最大的那个元素，以及其所在的行号和列号
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function randint(a, b) {
+        return a + Math.round(Math.random() * b);
+    }
+    var N, _a, M, _b, array, i, j, max, i, j;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 2:
+                M = _b.apply(void 0, [_c.sent()]);
+                array = [];
+                for (i = 0; i < N; i++) {
+                    array.push([]);
+                    for (j = 0; j < M; j++) {
+                        array[i].push(randint(0, 10));
+                    }
+                }
+                console.log(array);
+                max = [0, 0];
+                for (i = 0; i < array.length; i++) {
+                    for (j = 0; j < array[i].length; j++) {
+                        if (array[i][j] > array[max[0]][max[1]]) {
+                            max[0] = i;
+                            max[1] = j;
+                        }
+                    }
+                }
+                console.log(array[max[0]][max[1]], max[0], max[1]);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.13 创建一个n行m列的随机二维列表，求其中的的马鞍数，输出它的位置。所谓马鞍数，是指在行上最小而在列上最大的数
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function randint(a, b) {
+        return a + Math.round(Math.random() * b);
+    }
+    var N, _a, M, _b, array, i, j, i, min, j, flag, x;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 2:
+                M = _b.apply(void 0, [_c.sent()]);
+                array = [];
+                for (i = 0; i < N; i++) {
+                    array.push([]);
+                    for (j = 0; j < M; j++) {
+                        array[i].push(randint(0, 100));
+                    }
+                }
+                console.log(array);
+                for (i = 0; i < array.length; i++) {
+                    min = [i, 0];
+                    for (j = 0; j < array[i].length; j++) {
+                        if (array[i][j] < array[min[0]][min[1]]) {
+                            min[1] = j;
+                        }
+                    }
+                    flag = true;
+                    for (x = 0; x < array.length; x++) {
+                        if (array[x][min[1]] > array[min[0]][min[1]]) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        console.log(min[0], min[1]);
+                    }
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });

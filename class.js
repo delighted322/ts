@@ -83,4 +83,246 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
+}); });
+//1.3筛选法（1，2，3，4，5，6，7...第一次循环，2，4，6，8删除，第二次循环，3，6，9，12删除）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, array, i, i, index, str, _i, array_1, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                array = [];
+                for (i = 0; i <= N; i++) {
+                    array.push(i);
+                    if (i == 1) {
+                        array[1] = 0;
+                    }
+                }
+                for (i = 2; i < N / 2; i++) {
+                    index = i + 1;
+                    while (index <= N) {
+                        if ((array[index] != 0) && (array[index] % i == 0)) {
+                            array[index] = 0;
+                        }
+                        index++;
+                    }
+                }
+                str = "";
+                for (_i = 0, array_1 = array; _i < array_1.length; _i++) {
+                    i = array_1[_i];
+                    if (i != 0) {
+                        str += i + " ";
+                    }
+                }
+                console.log(str);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//1.4质因数分解(将一个数字分解成质因数  其实不需要求证因数是否为指数 例如能整除4就肯定能先被2整除)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, str, index;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                str = "";
+                index = 2;
+                while (N != 1) {
+                    if (N % index == 0) {
+                        str += index + " ";
+                        N /= index;
+                        index = 2;
+                    }
+                    else {
+                        index++;
+                    }
+                }
+                console.log(str);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//1.5求孪生素数(两个素数相差不大于2)
+//TODO
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.最大公约数和最小公倍数
+//2.1 穷举法
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, gcd, lcm, i;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                gcd = 2 //最大公约数
+                ;
+                lcm = Math.min(M, N) //最小公倍数
+                ;
+                for (i = 2; i <= Math.min(M, N); i++) {
+                    if (M % i == 0 && N % i == 0) {
+                        gcd = i;
+                    }
+                }
+                while (true) {
+                    if (lcm % M == 0 && lcm % N == 0) {
+                        console.log("最小公倍数：", lcm);
+                        break;
+                    }
+                    lcm++;
+                }
+                console.log("最大公约数：", gcd);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.2 辗转相除
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, initM, initN, temp, lcm;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                initM = M;
+                initN = N;
+                temp = 0;
+                while (N != 0) {
+                    temp = M % N;
+                    M = N;
+                    N = temp;
+                }
+                console.log("最大公约数：", M);
+                lcm = initM * initN / M;
+                console.log("最小公倍数", lcm);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.3辗转相减
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, initM, initN, temp, lcm;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                initM = M;
+                initN = N;
+                temp = 0;
+                while (N != 0) {
+                    temp = Math.max(M, N) - Math.min(M, N);
+                    M = Math.max(N, temp);
+                    N = Math.min(N, temp);
+                }
+                console.log("最大公约数：", M);
+                lcm = initM * initN / M;
+                console.log("最小公倍数", lcm);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.4打印n以内所有互质的数对
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function gcd(M, N) {
+        var temp = 0;
+        while (N != 0) {
+            temp = Math.max(M, N) - Math.min(M, N);
+            M = Math.max(N, temp);
+            N = Math.min(N, temp);
+        }
+        return M;
+    }
+    var N, _a, i, str, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                for (i = 1; i <= N; i++) {
+                    str = "";
+                    for (j = 1; j <= N; j++) {
+                        if (i > j) {
+                            continue;
+                        }
+                        if (gcd(i, j) == 1) {
+                            str += "[" + i + ", " + j + "]  ";
+                        }
+                    }
+                    console.log(str);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.5 N/M分数化简
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function gcd(M, N) {
+        var temp = 0;
+        while (N != 0) {
+            temp = Math.max(M, N) - Math.min(M, N);
+            M = Math.max(N, temp);
+            N = Math.min(N, temp);
+        }
+        return M;
+    }
+    var N, _a, M, _b, temp;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 2:
+                M = _b.apply(void 0, [_c.sent()]);
+                while (gcd(N, M) != 1) {
+                    temp = gcd(N, M);
+                    N = N / temp;
+                    M = M / temp;
+                }
+                console.log(N, M);
+                return [2 /*return*/];
+        }
+    });
 }); })();

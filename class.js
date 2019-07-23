@@ -325,4 +325,76 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
+}); });
+//2.6 分数的加法
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, M, _b, O, _c, P, _d;
+    return __generator(this, function (_e) {
+        switch (_e.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_e.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数M: ")];
+            case 2:
+                M = _b.apply(void 0, [_e.sent()]);
+                _c = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数O: ")];
+            case 3:
+                O = _c.apply(void 0, [_e.sent()]);
+                _d = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数P: ")];
+            case 4:
+                P = _d.apply(void 0, [_e.sent()]);
+                console.log("加法", N * P + O * M, M * P);
+                console.log("减法", N * P - O * M, M * P);
+                console.log("乘法", N * O, M * P);
+                console.log("除法", N * P, M * O);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.7 输入一个数字组成的字符串表示循环小数，求等价的分数 
+//如 输入3 输出1/3
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                i = 10;
+                while (N / i > 1) {
+                    i *= 10;
+                }
+                console.log(N, "/", i - 1);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//2.8 输入一个数N，找到所有1/M + 1/P =1/N的数对
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, P, M;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                P = 0;
+                for (M = N + 1; M <= N * 2; M++) {
+                    P = (M * N) / (M - N);
+                    if (P % 1 == 0) {
+                        console.log(M, P);
+                    }
+                }
+                return [2 /*return*/];
+        }
+    });
 }); })();
+//3. 列表的顺序查找

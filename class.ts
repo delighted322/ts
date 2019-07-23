@@ -191,4 +191,50 @@ import {input} from './utils'
         }
         return M
     }   
+});
+
+//2.6 分数的加法
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let M = Number(await input("输入一个自然数M: "))
+    let O = Number(await input("输入一个自然数O: "))
+    let P = Number(await input("输入一个自然数P: "))
+
+    console.log("加法", N * P + O * M, M * P)
+    console.log("减法", N * P - O * M, M * P)
+    console.log("乘法", N * O, M * P)
+    console.log("除法", N * P, M * O)
+});
+
+//2.7 输入一个数字组成的字符串表示循环小数，求等价的分数 
+//如 输入3 输出1/3
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let i = 10
+    while (N / i > 1) {
+        i *= 10
+    }
+    console.log(N, "/", i - 1)
+});
+
+//2.8 输入一个数N，找到所有1/M + 1/P =1/N的数对
+(async () => {
+    let N = Number(await input("输入一个自然数N: "))
+    let P = 0
+    for (let M = N + 1; M <= N * 2; M++) { // M、P ∈ [N + 1, N(N + 1)]
+        P = (M * N) / (M - N)
+        if (P % 1 == 0) {
+            console.log(M, P)
+        }
+    }
+});
+
+//3. 列表的顺序查找
+
+//3.1 生成一个长为100的列表 大小为1~99
+(async () => {
+    let array = []
+    for (let i = 0; i < 100; i++) {
+        
+    }
 })();

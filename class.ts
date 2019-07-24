@@ -235,6 +235,53 @@ import {input} from './utils'
 (async () => {
     let array = []
     for (let i = 0; i < 100; i++) {
-        
+        array.push(Math.round(100 * Math.random()))
     }
-})();
+    console.log(array)
+});
+
+//3.2 找出列表中最小的数并打印它的下标
+(async () => {
+    let array = []
+    for (let i = 0; i < 100; i++) {
+        array.push(Math.round(100 * Math.random()))
+    }
+    console.log(array)
+
+    let min = 0
+    for (let i = 0; i <array.length; i++) {
+        if (array[i] < array[min]) {
+            min = i
+        }
+    }
+    console.log("最小值：", array[min], "下标:", min)
+});
+
+//3.3 有一个列表，输入一个n，如果列表中有这个数，打印这个数第一次出现的下标，不存在则打印-1
+(async () => {
+    let N = Number(await input("输入一个自然数N："))
+    let array = []
+    for (let i = 0; i < 100; i++) {
+        array.push(Math.round(100 * Math.random()))
+    }
+    console.log(array)
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == N) {
+            console.log(i)
+            return
+        }
+    }
+    console.log(-1)
+});
+
+//3.4 列表中，问前多少个数的和是不超过300的（再多加一个就超过300了）
+(async () => {
+    let array = []
+    for (let i = 0; i < 100; i++) {
+        array.push(Math.round(100 * Math.random()))
+    }
+    console.log(array)
+    
+});
+

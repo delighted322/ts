@@ -387,7 +387,7 @@ var utils_1 = require("./utils");
             case 1:
                 N = _a.apply(void 0, [_b.sent()]);
                 P = 0;
-                for (M = N + 1; M <= N * 2; M++) {
+                for (M = N + 1; M <= N * 2; M++) { // M、P ∈ [N + 1, N(N + 1)]
                     P = (M * N) / (M - N);
                     if (P % 1 == 0) {
                         console.log(M, P);
@@ -396,5 +396,62 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
-}); })();
+}); });
 //3. 列表的顺序查找
+//3.1 生成一个长为100的列表 大小为1~99
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 100; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        console.log(array);
+        return [2 /*return*/];
+    });
+}); });
+//3.2 找出列表中最小的数并打印它的下标
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i, min, i;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 100; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        console.log(array);
+        min = 0;
+        for (i = 0; i < array.length; i++) {
+            if (array[i] < array[min]) {
+                min = i;
+            }
+        }
+        console.log("最小值：", array[min], "下标:", min);
+        return [2 /*return*/];
+    });
+}); });
+//3.3 有一个列表，输入一个n，如果列表中有这个数，打印这个数第一次出现的下标，不存在则打印-1
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, array, i, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("输入一个自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                array = [];
+                for (i = 0; i < 100; i++) {
+                    array.push(Math.round(100 * Math.random()));
+                }
+                console.log(array);
+                for (i = 0; i < array.length; i++) {
+                    if (array[i] == N) {
+                        console.log(i);
+                        return [2 /*return*/];
+                    }
+                }
+                console.log(-1);
+                return [2 /*return*/];
+        }
+    });
+}); })();

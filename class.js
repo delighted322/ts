@@ -454,4 +454,215 @@ var utils_1 = require("./utils");
                 return [2 /*return*/];
         }
     });
+}); });
+//3.4 列表中，问前多少个数的和是不超过300的（再多加一个就超过300了）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i, sum, index;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 100; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        console.log(array);
+        sum = 0;
+        index = 0;
+        while (sum <= 300) {
+            sum += array[index];
+            index++;
+        }
+        console.log(index--, sum);
+        return [2 /*return*/];
+    });
+}); });
+//3.5 用一个循环，同时找到列表中的最大和最小值
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i, min, max, i;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 100; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        console.log(array);
+        min = 0;
+        max = 0;
+        for (i = 0; i < array.length; i++) {
+            if (array[i] < array[min]) {
+                min = i;
+            }
+            if (array[i] > array[max]) {
+                max = i;
+            }
+        }
+        console.log(array[min], array[max]);
+        return [2 /*return*/];
+    });
+}); });
+//3.6 从先往后查列表，输出最小值的下标（如果有多个输出最后一个）
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i, min, i;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 100; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        console.log(array);
+        min = 0;
+        for (i = 0; i < array.length; i++) {
+            if (array[i] <= array[min]) {
+                min = i;
+            }
+        }
+        console.log(min, array[min]);
+        return [2 /*return*/];
+    });
+}); });
+//3.7 计算一下列表中奇数多还是偶数多
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i, odd, even, i, str;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 100; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        console.log(array);
+        odd = 0 //奇数
+        ;
+        even = 0 //偶数
+        ;
+        for (i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                even++;
+            }
+            else {
+                odd++;
+            }
+        }
+        str = odd > even ? "奇数多" : "偶数多";
+        console.log(str);
+        return [2 /*return*/];
+    });
+}); });
+//3.8 找出列表中第二大的数 (只用一次循环)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i, max, second, i;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 10; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        array = [9, 19, 18, 7];
+        console.log(array);
+        max = 0;
+        second = 1;
+        for (i = 1; i < array.length; i++) {
+            if (array[i] > array[max]) {
+                second = max;
+                max = i;
+            }
+            else if (array[i] > array[second]) {
+                second = i;
+            }
+        }
+        console.log(array[max], array[second], max, second);
+        return [2 /*return*/];
+    });
+}); });
+//3.9 找出列表中相邻两个数的和的最大值以及这两个数的下标
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var array, i, max, index, i;
+    return __generator(this, function (_a) {
+        array = [];
+        for (i = 0; i < 100; i++) {
+            array.push(Math.round(100 * Math.random()));
+        }
+        console.log(array);
+        max = array[0] + array[1];
+        index = 1;
+        for (i = 2; i < array.length; i++) {
+            if (array[i] + array[i - 1] > max) {
+                max = array[i] + array[i - 1];
+                index = i;
+            }
+        }
+        console.log(max, index - 1, index);
+        return [2 /*return*/];
+    });
+}); });
+//4. 二维列表
+//4.1 生成一个20行 30列的列表，写一个函数，把这个二维列表打印成矩阵
+function randMatrix(M, N) {
+    //let M = Number(await input("请输入一个自然数M：")) //行
+    //let N = Number(await input("请输入一个自然数N：")) //列
+    var list = []; //这里如果写 let list = Array<Array<number>>  会出错 why?
+    for (var m = 0; m < M; m++) {
+        list.push([]);
+        for (var n = 0; n < N; n++) {
+            list[m].push(Math.round(10 * Math.random()));
+        }
+    }
+    return list;
+}
+function printMatrix(list) {
+    for (var i = 0; i < list.length; i++) {
+        var str = "";
+        for (var j = 0; j < list[i].length; j++) {
+            str += list[i][j] + " ";
+        }
+        console.log(str);
+    }
+}
+;
+//4.2 求最大值以及它的下标
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, index, m, n;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]) //行
+                ;
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]) //列
+                ;
+                list = randMatrix(M, N);
+                printMatrix(list);
+                index = [0, 0];
+                for (m = 0; m < list.length; m++) {
+                    for (n = 0; n < list[m].length; n++) {
+                        if (list[m][n] > list[index[0]][index[1]]) {
+                            index[0] = m;
+                            index[1] = n;
+                        }
+                    }
+                }
+                console.log(list[index[0]][index[1]], index[0], index[1]);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.3 用一个循环打印二维列表
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]) //行
+                ;
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]) //列
+                ;
+                list = randMatrix(M, N);
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
 }); })();

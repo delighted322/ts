@@ -446,4 +446,91 @@ function printMatrix(list : Array<Array<number>>) {
     let N = Number(await input("请输入一个自然数N：")) //列
     let list = randMatrix(M, N)
     printMatrix(list)
+
+    console.log("------------")
+    let x = 0
+    let y = 0
+    let str = ""
+    for (let i = 0; i < M * N; i++) {
+        x = Math.floor(i / N)
+        y = i % N
+        str += list[x][y] + " "
+        if (y == N - 1) {
+            console.log(str)
+            str = ""
+        }
+    }
+});
+
+//4.4 弓字型打印
+(async () => {
+    let M = Number(await input("请输入一个自然数M：")) //行
+    let N = Number(await input("请输入一个自然数N：")) //列
+    let list = randMatrix(M, N)
+    printMatrix(list)
+
+    console.log("-----------------------")
+
+    let x = 0
+    let y = 0
+    let str = ""
+    let index = 0
+    for (let i = 0; i < M * N; i++) {
+        x = Math.floor(i / N)
+        if (x % 2 == 0) {
+            y = i % N
+        } else {
+            y = N - 1 - i % N
+        }
+
+        str += list[x][y] + " "
+        index++
+        if (index == N) {
+            console.log(str)
+            index = 0
+            str = ""
+        }
+    }
+    console.log(str)
+});
+
+//4.5 斜着打印 右上到左下  (其实 每一斜行x和y的和相等 可以简化)
+//TODO
+(async () => {
+    let M = Number(await input("请输入一个自然数M：")) //行
+    let N = Number(await input("请输入一个自然数N：")) //列
+    let list = randMatrix(M, N)
+    printMatrix(list)
+
+    console.log("-----------------------")
+
+    let x = 0
+    let y = 0
+    let str = ""
+    for (let i = 0; i < M + N; i++) {
+        while ((x >= 0 && x < M) && (y >= 0 && y < N)) {
+            str += list[x][y] + " "
+            x += 1
+            y -= 1
+        }
+        if (i < N - 1) {
+            x = 0
+            y = i + 1
+        } else {
+            y = N - 1
+            x = i + 2 - N
+        }
+        console.log(str)
+        str = ""
+    }
+});
+
+//4.6 找到二维列表中十字范围之和的最大值
+(async () => {
+    let M = Number(await input("请输入一个自然数M：")) //行
+    let N = Number(await input("请输入一个自然数N：")) //列
+    let list = randMatrix(M, N)
+    printMatrix(list)
+
+    
 })();

@@ -646,7 +646,7 @@ function printMatrix(list) {
 }); });
 //4.3 用一个循环打印二维列表
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var M, _a, N, _b, list;
+    var M, _a, N, _b, list, x, y, str, i;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -662,6 +662,108 @@ function printMatrix(list) {
                 ;
                 list = randMatrix(M, N);
                 printMatrix(list);
+                console.log("------------");
+                x = 0;
+                y = 0;
+                str = "";
+                for (i = 0; i < M * N; i++) {
+                    x = Math.floor(i / N);
+                    y = i % N;
+                    str += list[x][y] + " ";
+                    if (y == N - 1) {
+                        console.log(str);
+                        str = "";
+                    }
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.4 弓字型打印
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, x, y, str, index, i;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]) //行
+                ;
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]) //列
+                ;
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("-----------------------");
+                x = 0;
+                y = 0;
+                str = "";
+                index = 0;
+                for (i = 0; i < M * N; i++) {
+                    x = Math.floor(i / N);
+                    if (x % 2 == 0) {
+                        y = i % N;
+                    }
+                    else {
+                        y = N - 1 - i % N;
+                    }
+                    str += list[x][y] + " ";
+                    index++;
+                    if (index == N) {
+                        console.log(str);
+                        index = 0;
+                        str = "";
+                    }
+                }
+                console.log(str);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.5 斜着打印 右上到左下
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, x, y, str, i;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]) //行
+                ;
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]) //列
+                ;
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("-----------------------");
+                x = 0;
+                y = 0;
+                str = "";
+                for (i = 0; i < M + N; i++) {
+                    // console.log("----------", i)
+                    while ((x >= 0 && x < M) && (y >= 0 && y < N)) {
+                        // console.log(x, y, i)
+                        str += list[x][y] + " ";
+                        x += 1;
+                        y -= 1;
+                    }
+                    if (i < N - 1) {
+                        x = 0;
+                        y = i + 1;
+                    }
+                    else {
+                        y = N - 1;
+                        x = i + 2 - N;
+                    }
+                    console.log(str);
+                    str = "";
+                }
                 return [2 /*return*/];
         }
     });

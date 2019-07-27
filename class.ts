@@ -411,6 +411,7 @@ function randMatrix(M : number, N : number) {
     return list
 }
 
+//打印二维列表
 function printMatrix(list : Array<Array<number>>) {
     for (let i = 0; i < list.length; i++) {
         let str = ""
@@ -532,5 +533,180 @@ function printMatrix(list : Array<Array<number>>) {
     let list = randMatrix(M, N)
     printMatrix(list)
 
-    
+    let max = 0
+    for (let i = 0; i < M; i++) {
+        for (let j = 0; j < N; j++) {
+            let sum = 0
+            for (let y = 0; y < N; y++) {
+                sum += list[i][y]
+            }
+            for (let x = 0; x < M; x++) {
+                sum += list[x][j]
+            }
+            sum -= list[i][j]
+            if (sum > max) {
+                max = sum
+            }
+        }
+    }
+    console.log(max)
+});
+
+//5 一维列表的交换
+
+//5.1 生成一个长度为20的一维列表
+function randList(len : number) : number[] {
+    let list = []
+    for (let i = 0; i < len; i++) {
+        list.push(Math.round(Math.random() * 20))
+    }
+    return list
+}
+//打印一维列表
+function printList(list : number[]) {
+    let str = ""
+    for (let i = 0; i < list.length; i++) {
+        str += list[i] + " "
+    }
+    console.log(str)
+}
+
+//5.2 把列表中的值都向前移一格
+(() => {
+    let list = randList(20)
+    printList(list)
+    let first = list[0]
+    for (let i = 0; i < list.length; i++) {
+        list[i] = list[i + 1]
+        if (i == list.length - 1) {
+            list[i] = first
+        }
+    }
+    printList(list)
+});
+
+//5.3 把列表中的值都向后移动一格
+(() => {
+    let list = randList(20)
+    printList(list)
+
+    let last = list[list.length - 1]
+    for (let i = list.length - 1; i >= 0; i--) {
+        list[i] = list[i - 1]
+        if (i == 0) {
+            list[i] = last
+        }
+    }
+    printList(list)
+});
+
+//5.4 成对交换  1跟2换 3跟4换 5跟6换
+(() => {
+    let list = randList(20)
+    printList(list)
+
+    for (let i = 1; i < list.length; i += 2) {
+        let temp = list[i]
+        list[i] = list[i - 1]
+        list[i - 1] = temp
+    }
+    printList(list)
+});
+
+//5.5 列表转置
+(() => {
+    let list = randList(20)
+    printList(list)
+
+    for (let i = 0; i < list.length / 2; i++) {
+        let temp = list[i]
+        list[i] = list[list.length - 1 - i]
+        list[list.length - 1 - i] = temp
+    }
+    printList(list)
+});
+
+//5.6 将列表中的每个数变成自己和前一个数的和 (第一个数是第一个数加最后一个数  加的是原列表里的值)
+(() => {
+    let list = randList(20)
+    printList(list)
+
+    let last = list[list.length - 1]
+    for (let i = list.length - 1; i >= 0; i--) {
+        if (i == 0) {
+            list[i] = list[i] + last
+            break
+        }
+        list[i] = list[i] + list[i - 1]
+    }
+    printList(list)
+});
+
+//5.7 最大最小值交换
+(() => {
+    let list = randList(10)
+    printList(list)
+
+    let max = 0
+    let min = 0
+    for (let i = 1; i < list.length - 1; i++) {
+        if (list[i] > list[max]) {
+            max = i
+        }
+        if (list[i] < list[min]) {
+            min = i
+        }
+    }
+    let temp = list[min]
+    list[min] = list[max]
+    list[max] = temp
+    printList(list)
+});
+
+//6 二维列表的交换
+
+//6.1 在原位将二维列表左右翻转
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < list[i].length / 2; j++) {
+            let temp = list[i][j]
+            list[i][j] = list[i][list[i].length - 1 - j]
+            list[i][list[i].length - 1 - j] = temp
+        }
+    }
+    console.log("------------------------------")
+    printMatrix(list)
+});
+
+//6.2 上下翻转
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
+    for (let j = 0; j < list[0].length; j++) {
+        for (let i = 0; i < list.length / 2; i++) {
+            let temp = list[i][j]
+            list[i][j] = list[list.length - 1 - i][j]
+            list[list.length - 1 - i][j] = temp
+        }
+    }
+    printMatrix(list)
+});
+
+//6.3 转置
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
 })();

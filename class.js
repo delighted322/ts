@@ -602,6 +602,7 @@ function randMatrix(M, N) {
     }
     return list;
 }
+//打印二维列表
 function printMatrix(list) {
     for (var i = 0; i < list.length; i++) {
         var str = "";
@@ -723,7 +724,8 @@ function printMatrix(list) {
         }
     });
 }); });
-//4.5 斜着打印 右上到左下
+//4.5 斜着打印 右上到左下  (其实 每一斜行x和y的和相等 可以简化)
+//TODO
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var M, _a, N, _b, list, x, y, str, i;
     return __generator(this, function (_c) {
@@ -746,9 +748,7 @@ function printMatrix(list) {
                 y = 0;
                 str = "";
                 for (i = 0; i < M + N; i++) {
-                    // console.log("----------", i)
                     while ((x >= 0 && x < M) && (y >= 0 && y < N)) {
-                        // console.log(x, y, i)
                         str += list[x][y] + " ";
                         x += 1;
                         y -= 1;
@@ -764,6 +764,223 @@ function printMatrix(list) {
                     console.log(str);
                     str = "";
                 }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//4.6 找到二维列表中十字范围之和的最大值
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, max, i, j, sum, y, x;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]) //行
+                ;
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]) //列
+                ;
+                list = randMatrix(M, N);
+                printMatrix(list);
+                max = 0;
+                for (i = 0; i < M; i++) {
+                    for (j = 0; j < N; j++) {
+                        sum = 0;
+                        for (y = 0; y < N; y++) {
+                            sum += list[i][y];
+                        }
+                        for (x = 0; x < M; x++) {
+                            sum += list[x][j];
+                        }
+                        sum -= list[i][j];
+                        if (sum > max) {
+                            max = sum;
+                        }
+                    }
+                }
+                console.log(max);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//5 一维列表的交换
+//5.1 生成一个长度为20的一维列表
+function randList(len) {
+    var list = [];
+    for (var i = 0; i < len; i++) {
+        list.push(Math.round(Math.random() * 20));
+    }
+    return list;
+}
+//打印一维列表
+function printList(list) {
+    var str = "";
+    for (var i = 0; i < list.length; i++) {
+        str += list[i] + " ";
+    }
+    console.log(str);
+}
+//5.2 把列表中的值都向前移一格
+(function () {
+    var list = randList(20);
+    printList(list);
+    var first = list[0];
+    for (var i = 0; i < list.length; i++) {
+        list[i] = list[i + 1];
+        if (i == list.length - 1) {
+            list[i] = first;
+        }
+    }
+    printList(list);
+});
+//5.3 把列表中的值都向后移动一格
+(function () {
+    var list = randList(20);
+    printList(list);
+    var last = list[list.length - 1];
+    for (var i = list.length - 1; i >= 0; i--) {
+        list[i] = list[i - 1];
+        if (i == 0) {
+            list[i] = last;
+        }
+    }
+    printList(list);
+});
+//5.4 成对交换  1跟2换 3跟4换 5跟6换
+(function () {
+    var list = randList(20);
+    printList(list);
+    for (var i = 1; i < list.length; i += 2) {
+        var temp = list[i];
+        list[i] = list[i - 1];
+        list[i - 1] = temp;
+    }
+    printList(list);
+});
+//5.5 列表转置
+(function () {
+    var list = randList(20);
+    printList(list);
+    for (var i = 0; i < list.length / 2; i++) {
+        var temp = list[i];
+        list[i] = list[list.length - 1 - i];
+        list[list.length - 1 - i] = temp;
+    }
+    printList(list);
+});
+//5.6 将列表中的每个数变成自己和前一个数的和 (第一个数是第一个数加最后一个数  加的是原列表里的值)
+(function () {
+    var list = randList(20);
+    printList(list);
+    var last = list[list.length - 1];
+    for (var i = list.length - 1; i >= 0; i--) {
+        if (i == 0) {
+            list[i] = list[i] + last;
+            break;
+        }
+        list[i] = list[i] + list[i - 1];
+    }
+    printList(list);
+});
+//5.7 最大最小值交换
+(function () {
+    var list = randList(10);
+    printList(list);
+    var max = 0;
+    var min = 0;
+    for (var i = 1; i < list.length - 1; i++) {
+        if (list[i] > list[max]) {
+            max = i;
+        }
+        if (list[i] < list[min]) {
+            min = i;
+        }
+    }
+    var temp = list[min];
+    list[min] = list[max];
+    list[max] = temp;
+    printList(list);
+});
+//6 二维列表的交换
+//6.1 在原位将二维列表左右翻转
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, i, j, temp;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                for (i = 0; i < list.length; i++) {
+                    for (j = 0; j < list[i].length / 2; j++) {
+                        temp = list[i][j];
+                        list[i][j] = list[i][list[i].length - 1 - j];
+                        list[i][list[i].length - 1 - j] = temp;
+                    }
+                }
+                console.log("------------------------------");
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//6.2 上下翻转
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, j, i, temp;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
+                for (j = 0; j < list[0].length; j++) {
+                    for (i = 0; i < list.length / 2; i++) {
+                        temp = list[i][j];
+                        list[i][j] = list[list.length - 1 - i][j];
+                        list[list.length - 1 - i][j] = temp;
+                    }
+                }
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//6.3 转置
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
                 return [2 /*return*/];
         }
     });

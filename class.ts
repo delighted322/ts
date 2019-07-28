@@ -1,5 +1,6 @@
 // 11B 上课题目
 import {input} from './utils'
+import { format } from 'util';
 
 //1. 质数
 
@@ -665,6 +666,7 @@ function printList(list : number[]) {
 
 //6 二维列表的交换
 
+//生成一个8 × 8的二维列表
 //6.1 在原位将二维列表左右翻转
 (async () => {
     let M = Number(await input("请输入一个自然数M："))
@@ -701,7 +703,8 @@ function printList(list : number[]) {
     printMatrix(list)
 });
 
-//6.3 转置
+//6.3 转置 沿对角线翻转
+//6.3.1 沿左上到右下的对角线翻转
 (async () => {
     let M = Number(await input("请输入一个自然数M："))
     let N = Number(await input("请输入一个自然数N："))
@@ -709,4 +712,138 @@ function printList(list : number[]) {
     printMatrix(list)
     console.log("----------------")
 
+    for (let i = 1; i < M; i++) {
+        for (let j = 0; j < i; j++) {
+            let temp = list[i][j]
+            list[i][j] = list[j][i]
+            list[j][i] = temp
+        }
+    }
+    printMatrix(list)
+});
+
+//6.3.2 沿右上到左下的对角线翻转
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
+    for (let i = 0; i < M - 1; i++) {
+        for (let j = 0; j < N - 1 - i; j++) {
+            let temp = list[i][j]
+            list[i][j] = list[N - 1 - j][N - 1 - i]
+            list[N - 1 - j][N - 1 - i] = temp
+        }
+    }
+    printMatrix(list)
+});
+
+//6.4 中心对称
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
+    for (let i = 0; i < list.length / 2; i++) {
+        for (let j = 0; j < list.length; j++) {
+            let temp = list[i][j]
+            list[i][j] = list[M - 1 - i][N - 1 - j]
+            list[M - 1 - i][N - 1 - j] = temp
+        }
+    }
+    printMatrix(list)
+});
+
+//6.5 把8 × 8的矩阵分成多个2 × 2的小矩阵 每个小矩阵内部的数字顺时针移动一位
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
+    for (let i = 0; i < list.length - 1; i += 2) {
+        for (let j = 0; j < list[i].length - 1; j += 2) {
+            let a = list[i][j]
+            let b = list[i][j + 1]
+            list[i][j] = list[i + 1][j]
+            list[i][j + 1] = a
+            list[i + 1][j] = list[i + 1][j + 1]
+            list[i + 1][j + 1] = b
+        }
+    }
+    printMatrix(list)
+});
+
+//6.6 交换矩阵的最大最小数
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
+    let max = [0, 0]
+    let min = [0, 0]
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < list[i].length; j++) {
+            if (list[i][j] > list[max[0]][max[1]]) {
+                max = [i, j]
+            }
+            if (list[i][j] < list[min[0]][min[1]]) {
+                min = [i, j]
+            }
+        }
+    }
+    let a = list[max[0]][max[1]]
+    let b = list[min[0]][min[1]]
+    list[max[0]][max[1]] = b
+    list[min[0]][min[1]] = a
+    printMatrix(list)
+});
+
+//6.7 矩阵右转90度
+//TODO 有没有办法不用另外一个数组 直接原地转90度
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
+    let list2 = []
+    for (let i = 0; i < M; i++) {
+        list2.push([])
+        for (let j = 0; j < N; j++) {
+            list2[i].push(-1)
+        }
+    }
+
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < list[i].length; j++) {
+            list2[i][j] = list[i][j]
+            if (list2[list[i].length - 1 - j][i] != -1) {
+                list[i][j] = list2[list[i].length - 1 - j][i]
+            } else{
+                list[i][j] = list[list[i].length - 1 - j][i]
+            }
+        }
+    }
+    printMatrix(list)
+});
+
+//7.简单排序
+
+//7.1 选择排序：每一次选出最小的，把它跟它应该在的位置互换
+
+//7.1.1 用选择排序的方法将列表排序
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
 })();

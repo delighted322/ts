@@ -906,6 +906,7 @@ function printList(list) {
     printList(list);
 });
 //6 二维列表的交换
+//生成一个8 × 8的二维列表
 //6.1 在原位将二维列表左右翻转
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var M, _a, N, _b, list, i, j, temp;
@@ -964,9 +965,10 @@ function printList(list) {
         }
     });
 }); });
-//6.3 转置
+//6.3 转置 沿对角线翻转
+//6.3.1 沿左上到右下的对角线翻转
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    var M, _a, N, _b, list;
+    var M, _a, N, _b, list, i, j, temp;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -980,6 +982,202 @@ function printList(list) {
                 N = _b.apply(void 0, [_c.sent()]);
                 list = randMatrix(M, N);
                 printMatrix(list);
+                console.log("----------------");
+                for (i = 1; i < M; i++) {
+                    for (j = 0; j < i; j++) {
+                        temp = list[i][j];
+                        list[i][j] = list[j][i];
+                        list[j][i] = temp;
+                    }
+                }
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//6.3.2 沿右上到左下的对角线翻转
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, i, j, temp;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
+                for (i = 0; i < M - 1; i++) {
+                    for (j = 0; j < N - 1 - i; j++) {
+                        temp = list[i][j];
+                        list[i][j] = list[N - 1 - j][N - 1 - i];
+                        list[N - 1 - j][N - 1 - i] = temp;
+                    }
+                }
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//6.4 中心对称
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, i, j, temp;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
+                for (i = 0; i < list.length / 2; i++) {
+                    for (j = 0; j < list.length; j++) {
+                        temp = list[i][j];
+                        list[i][j] = list[M - 1 - i][N - 1 - j];
+                        list[M - 1 - i][N - 1 - j] = temp;
+                    }
+                }
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//6.5 把8 × 8的矩阵分成多个2 × 2的小矩阵 每个小矩阵内部的数字顺时针移动一位
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, i, j, a, b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
+                for (i = 0; i < list.length - 1; i += 2) {
+                    for (j = 0; j < list[i].length - 1; j += 2) {
+                        a = list[i][j];
+                        b = list[i][j + 1];
+                        list[i][j] = list[i + 1][j];
+                        list[i][j + 1] = a;
+                        list[i + 1][j] = list[i + 1][j + 1];
+                        list[i + 1][j + 1] = b;
+                    }
+                }
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//6.6 交换矩阵的最大最小数
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, max, min, i, j, a, b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
+                max = [0, 0];
+                min = [0, 0];
+                for (i = 0; i < list.length; i++) {
+                    for (j = 0; j < list[i].length; j++) {
+                        if (list[i][j] > list[max[0]][max[1]]) {
+                            max = [i, j];
+                        }
+                        if (list[i][j] < list[min[0]][min[1]]) {
+                            min = [i, j];
+                        }
+                    }
+                }
+                a = list[max[0]][max[1]];
+                b = list[min[0]][min[1]];
+                list[max[0]][max[1]] = b;
+                list[min[0]][min[1]] = a;
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//6.7 矩阵右转90度
+//TODO 有没有办法不用另外一个数组 直接原地转90度
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, list2, i, j, i, j;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
+                list2 = [];
+                for (i = 0; i < M; i++) {
+                    list2.push([]);
+                    for (j = 0; j < N; j++) {
+                        list2[i].push(-1);
+                    }
+                }
+                for (i = 0; i < list.length; i++) {
+                    for (j = 0; j < list[i].length; j++) {
+                        list2[i][j] = list[i][j];
+                        if (list2[list[i].length - 1 - j][i] != -1) {
+                            list[i][j] = list2[list[i].length - 1 - j][i];
+                        }
+                        else {
+                            list[i][j] = list[list[i].length - 1 - j][i];
+                        }
+                    }
+                }
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//7.简单排序
+//7.1 选择排序：每一次选出最小的，把它跟它应该在的位置互换
+//7.1.1 用选择排序的方法将列表排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
                 console.log("----------------");
                 return [2 /*return*/];
         }

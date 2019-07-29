@@ -1,6 +1,5 @@
 // 11B 上课题目
 import {input} from './utils'
-import { format } from 'util';
 
 //1. 质数
 
@@ -836,6 +835,35 @@ function printList(list : number[]) {
     printMatrix(list)
 });
 
+//原地右转90度
+(async () => {
+    let M = Number(await input("请输入一个自然数M："))
+    let N = Number(await input("请输入一个自然数N："))
+    let list = randMatrix(M, N)
+    printMatrix(list)
+    console.log("----------------")
+
+    let a = []
+    let b = []
+    let c = []
+    let d = []
+    for (let i = 0; i < Math.floor(M / 2); i++) {
+        for (let j = 0; j < Math.floor((N + 1) / 2); j++) {   // a    d
+            a = [i, j]                                        // b    c
+            b = [N - 1 - j, i]
+            c = [N - 1 - b[1], b[0]]
+            d = [N - 1 - c[1], c[0]]
+            let temp = list[a[0]][a[1]]
+
+            list[a[0]][a[1]] = list[b[0]][b[1]]
+            list[b[0]][b[1]] = list[c[0]][c[1]]
+            list[c[0]][c[1]] = list[d[0]][d[1]]
+            list[d[0]][d[1]] = temp
+        }
+    }
+    printMatrix(list)
+});
+
 //7.简单排序
 
 //7.1 选择排序：每一次选出最小的，把它跟它应该在的位置互换
@@ -846,4 +874,226 @@ function printList(list : number[]) {
     let list = randList(N)
     printList(list)
     console.log("----------------")
+
+    for (let i = 0; i < list.length; i++) {
+        let min = i
+        for (let j = i; j < list.length; j++) {
+            if (list[j] < list[min]) {
+                min = j
+            }
+        }
+        let temp = list[i]
+        list[i] = list[min]
+        list[min] = temp
+    }
+    printList(list)
+});
+
+//7.1.2 不用循环 用if判断 将3个数用选择排序的方法排序
+//TODO 
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+});
+
+//7.1.3 所有的奇数在偶数前面 奇数偶数分别排序
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+    for (let i = 0; i < list.length; i++) {
+        let min = i
+        for (let j = i; j < list.length; j++) {
+            if (myCompare(list[min], list[j])) {
+                min = j
+            }
+        }
+        let temp = list[i]
+        list[i] = list[min] 
+        list[min] = temp
+    }
+    printList(list)
+});
+
+// 排序规则 奇数比偶数小 奇数偶数分别排序
+function myCompare(M : number, N : number) { //false: M < N   true: M > N
+    if ((M + N) % 2 == 0) {
+        return M > N ? true : false
+    } else {
+        return M % 2 == 1 ? false : true
+    }
+}
+
+//7.2 插入排序：将无序部分的第一个数字跟前面已经有序部分比大小，从有序部分的最后一个数字开始比，比到这个数合适的位置后停下来，类似于理牌
+
+//7.2.1 用插入排序的方法将列表排序
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+    for (let i = 1; i < list.length; i++) { //i是无序部分的第一个数的下标
+        let index = i
+        for (let j = i - 1; j >= 0; j--) {
+            if (list[index] < list[j]) {
+                let temp = list[index]
+                list[index] = list[j]
+                list[j] = temp
+                index = j
+            } else {
+                break
+            }
+        }
+    }
+    printList(list)
+});
+
+//7.2.2 不用循环 用if判断 将3个数用选择排序的方法排序
+//TODO 
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+});
+
+//7.2.3 所有的奇数在偶数前面 奇数偶数分别排序
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+    for (let i = 1; i < list.length; i++) {
+        let index = i
+        for (let j = i - 1; j >= 0; j--) {
+            if (myCompare(list[j], list[index])) {
+                let temp = list[index]
+                list[index] = list[j]
+                list[j] = temp
+                index = j
+            } else {
+                break
+            }
+        }
+    }
+    printList(list)
+});
+
+//7.3 冒泡排序：相邻两个挨个比 大的往后换
+
+//7.3.1 用冒泡排序的方法将数列排序
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < list.length - i - 1; j++) {
+            if (list[j] > list[j + 1]) {
+                let temp = list[j]
+                list[j] = list[j + 1]
+                list[j + 1] = temp
+            }
+        }
+    }
+    printList(list)
+});
+
+//7.3.2 不用循环 用if判断 将3个数用冒泡排序的方法排序
+//TODO 
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+});
+
+//7.3.4 奇数在偶数的前面 奇数偶数分别排序
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log("----------------")
+
+    for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < list.length - i - 1; j++) {
+            if (myCompare(list[j], list[j + 1])) {
+                let temp = list[j]
+                list[j] = list[j + 1]
+                list[j + 1] = temp
+            }
+        }
+    }
+    printList(list)
+});
+
+//8. 递归
+
+//8.1 定义四个函数 分别是分数的加减乘除
+function plus(X : number[], Y : number[]) { //加  x : [x0, x1]   y : [y0, y1]
+    return simplify([X[0] * Y[1] + Y[0] * X[1], X[1] * Y[1]])
+}
+
+function minus(X : number[], Y : number[]) { //减
+    return simplify([X[0] * Y[1] - Y[0] * X[1], X[1] * Y[1]])
+}
+
+function multiply(X : number[], Y : number[]) { //乘
+    return simplify([X[0] * Y[0], X[1] * Y[1]])
+}
+
+function divide(X : number[], Y : number[]) { //除
+    return simplify([X[0] * Y[1], X[1] * Y[0]])
+}
+
+function simplify(N : number[]) { //分数化简
+    let gcd = 1
+    let x = N[0]
+    let y = N[1]
+
+    let temp = 0
+    while (y != 0) {
+        temp = x
+        x = y
+        y = temp % x
+    }
+
+    return [N[0] / x, N[1] / x]
+}
+
+//8.2 繁分数化简   x = 1
+//1 + 1 / (1 + x)
+//x = 1 / (1 + x)
+//TODO 如果要求返回的是分数要怎么弄
+(async () => {
+    let N = Number(await input("请输入一个自然数N：")) //N表示有几层x
+
+    function result(N : number) {
+        if (N == 1) {
+            //return [3, 2]
+            return 3 / 2
+        } else {
+            //return divide(result(N - 1)[0] + result(N - 1)[1], result(N - 1)[0]) //这样递归出不来
+            return (1 + 1 / result(N - 1))
+        }
+    }
+    console.log(result(N))
+});
+
+//8.3 求A(n) B(n)
+//     0    1    2    3    4    5
+// A   5    2   -6   -16  -20  -8
+// B   1   -3   -8   -10  -4   12
+(() => {
+
 })();

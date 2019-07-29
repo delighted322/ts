@@ -1164,9 +1164,78 @@ function printList(list) {
         }
     });
 }); });
+//原地右转90度
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var M, _a, N, _b, list, a, b, c, d, i, j, temp;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                list = randMatrix(M, N);
+                printMatrix(list);
+                console.log("----------------");
+                a = [];
+                b = [];
+                c = [];
+                d = [];
+                for (i = 0; i < Math.floor(M / 2); i++) {
+                    for (j = 0; j < Math.floor((N + 1) / 2); j++) { // a    d
+                        a = [i, j]; // b    c
+                        b = [N - 1 - j, i];
+                        c = [N - 1 - b[1], b[0]];
+                        d = [N - 1 - c[1], c[0]];
+                        temp = list[a[0]][a[1]];
+                        list[a[0]][a[1]] = list[b[0]][b[1]];
+                        list[b[0]][b[1]] = list[c[0]][c[1]];
+                        list[c[0]][c[1]] = list[d[0]][d[1]];
+                        list[d[0]][d[1]] = temp;
+                    }
+                }
+                printMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
 //7.简单排序
 //7.1 选择排序：每一次选出最小的，把它跟它应该在的位置互换
 //7.1.1 用选择排序的方法将列表排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list, i, min, j, temp;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                for (i = 0; i < list.length; i++) {
+                    min = i;
+                    for (j = i; j < list.length; j++) {
+                        if (list[j] < list[min]) {
+                            min = j;
+                        }
+                    }
+                    temp = list[i];
+                    list[i] = list[min];
+                    list[min] = temp;
+                }
+                printList(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//7.1.2 不用循环 用if判断 将3个数用选择排序的方法排序
+//TODO 
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var N, _a, list;
     return __generator(this, function (_b) {
@@ -1182,4 +1251,259 @@ function printList(list) {
                 return [2 /*return*/];
         }
     });
-}); })();
+}); });
+//7.1.3 所有的奇数在偶数前面 奇数偶数分别排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list, i, min, j, temp;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                for (i = 0; i < list.length; i++) {
+                    min = i;
+                    for (j = i; j < list.length; j++) {
+                        if (myCompare(list[min], list[j])) {
+                            min = j;
+                        }
+                    }
+                    temp = list[i];
+                    list[i] = list[min];
+                    list[min] = temp;
+                }
+                printList(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+// 排序规则 奇数比偶数小 奇数偶数分别排序
+function myCompare(M, N) {
+    if ((M + N) % 2 == 0) {
+        return M > N ? true : false;
+    }
+    else {
+        return M % 2 == 1 ? false : true;
+    }
+}
+//7.2 插入排序：将无序部分的第一个数字跟前面已经有序部分比大小，从有序部分的最后一个数字开始比，比到这个数合适的位置后停下来，类似于理牌
+//7.2.1 用插入排序的方法将列表排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list, i, index, j, temp;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                for (i = 1; i < list.length; i++) { //i是无序部分的第一个数的下标
+                    index = i;
+                    for (j = i - 1; j >= 0; j--) {
+                        if (list[index] < list[j]) {
+                            temp = list[index];
+                            list[index] = list[j];
+                            list[j] = temp;
+                            index = j;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+                printList(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//7.2.2 不用循环 用if判断 将3个数用选择排序的方法排序
+//TODO 
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                return [2 /*return*/];
+        }
+    });
+}); });
+//7.2.3 所有的奇数在偶数前面 奇数偶数分别排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list, i, index, j, temp;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                for (i = 1; i < list.length; i++) {
+                    index = i;
+                    for (j = i - 1; j >= 0; j--) {
+                        if (myCompare(list[j], list[index])) {
+                            temp = list[index];
+                            list[index] = list[j];
+                            list[j] = temp;
+                            index = j;
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                }
+                printList(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//7.3 冒泡排序：相邻两个挨个比 大的往后换
+//7.3.1 用冒泡排序的方法将数列排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list, i, j, temp;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                for (i = 0; i < list.length; i++) {
+                    for (j = 0; j < list.length - i - 1; j++) {
+                        if (list[j] > list[j + 1]) {
+                            temp = list[j];
+                            list[j] = list[j + 1];
+                            list[j + 1] = temp;
+                        }
+                    }
+                }
+                printList(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//7.3.2 不用循环 用if判断 将3个数用冒泡排序的方法排序
+//TODO 
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                return [2 /*return*/];
+        }
+    });
+}); });
+//7.3.4 奇数在偶数的前面 奇数偶数分别排序
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var N, _a, list, i, j, temp;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log("----------------");
+                for (i = 0; i < list.length; i++) {
+                    for (j = 0; j < list.length - i - 1; j++) {
+                        if (myCompare(list[j], list[j + 1])) {
+                            temp = list[j];
+                            list[j] = list[j + 1];
+                            list[j + 1] = temp;
+                        }
+                    }
+                }
+                printList(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//8. 递归
+//8.1 定义四个函数 分别是分数的加减乘除
+function plus(X, Y) {
+    return simplify([X[0] * Y[1] + Y[0] * X[1], X[1] * Y[1]]);
+}
+function minus(X, Y) {
+    return simplify([X[0] * Y[1] - Y[0] * X[1], X[1] * Y[1]]);
+}
+function multiply(X, Y) {
+    return simplify([X[0] * Y[0], X[1] * Y[1]]);
+}
+function divide(X, Y) {
+    return simplify([X[0] * Y[1], X[1] * Y[0]]);
+}
+function simplify(N) {
+    var gcd = 1;
+    var x = N[0];
+    var y = N[1];
+    var temp = 0;
+    while (y != 0) {
+        temp = x;
+        x = y;
+        y = temp % x;
+    }
+    return [N[0] / x, N[1] / x];
+}
+//8.2 繁分数化简   x = 1
+//1 + 1 / (1 + x)
+//x = 1 / (1 + x)
+//TODO 如果要求返回的是分数要怎么弄
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function result(N) {
+        if (N == 1) {
+            //return [3, 2]
+            return 3 / 2;
+        }
+        else {
+            //return divide(result(N - 1)[0] + result(N - 1)[1], result(N - 1)[0]) //这样递归出不来
+            return (1 + 1 / result(N - 1));
+        }
+    }
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]) //N表示有几层x
+                ;
+                console.log(result(N));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//8.3 求A(n) B(n)
+//     0    1    2    3    4    5
+// A   5    2   -6   -16  -20  -8
+// B   1   -3   -8   -10  -4   12
+(function () {
+})();

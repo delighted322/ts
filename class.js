@@ -1506,4 +1506,182 @@ function simplify(N) {
 // A   5    2   -6   -16  -20  -8
 // B   1   -3   -8   -10  -4   12
 (function () {
-})();
+    function A(n) {
+        if (n == 0) {
+            return 5;
+        }
+        return 2 * B(n - 1);
+    }
+    function B(n) {
+        if (n == 0) {
+            return 1;
+        }
+        return A(n) - A(n - 1);
+    }
+    console.log(A(5), B(5));
+});
+//8.4 打印数列 (展开打印 不要出现括号)
+// [10, 20, [1, 2], 80, [1, 3, [8, 4]]]
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function print(array) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] instanceof Array) {
+                print(array[i]);
+            }
+            else {
+                str += array[i] + " ";
+            }
+        }
+    }
+    var array, str;
+    return __generator(this, function (_a) {
+        array = [10, 20, [1, 2], 80, [1, 3, [8, 4]]];
+        str = "";
+        print(array);
+        console.log(str);
+        return [2 /*return*/];
+    });
+}); });
+//9.
+//9.1 求数列的前n项和(用递归的思路)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function S(list, n) {
+        if (n == 1) {
+            return list[0];
+        }
+        else {
+            return S(list, n - 1) + list[n - 1];
+        }
+    }
+    var N, _a, list;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log(S(list, 3));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//9.2 求数列的最大值 (递归的思路  第N项和第第N - 1项的关系)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function max(list, n) {
+        if (n == 0) {
+            return list[0];
+        }
+        else {
+            return Math.max(max(list, n - 1), list[n - 1]);
+        }
+    }
+    var N, _a, list;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log(max(list, list.length));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//9.3 同时返回最大值和最小值
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function maxAndMin(list, n) {
+        if (n == 0) {
+            return [list[0], list[0]]; //前面的是最大值 后面的是最小值
+        }
+        else {
+            return [Math.max(maxAndMin(list, n - 1)[0], list[n - 1]), Math.min(maxAndMin(list, n - 1)[1], list[n - 1])];
+        }
+    }
+    var N, _a, list;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                list = randList(N);
+                printList(list);
+                console.log(maxAndMin(list, list.length));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//9.4 定义一个函数 打印这个数列的n项的值
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    // 1  2  4  8  16  32  64  128 ......
+    function array1(n) {
+        if (n == 1) {
+            return 1;
+        }
+        else {
+            return 2 * array1(n - 1);
+        }
+    }
+    //1  2  4  7  11  16  22  29 ......
+    function array2(n) {
+        if (n == 1) {
+            return 1;
+        }
+        else {
+            return array2(n - 1) + n - 1;
+        }
+    }
+    // 1  2  4  5  7  8  10  11  13  14  16  17
+    function array3(n) {
+        if (n == 1) {
+            return 1;
+        }
+        else {
+            return array3(n - 1) + n % 2 + 1;
+        }
+    }
+    // 1  1  2  2  4  4  5  8  7
+    function array4(n) {
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        else {
+            if (n % 2 == 1) {
+                return array4(n - 2) + Math.floor((n + 1) / 2) % 2 + 1;
+            }
+            else {
+                return array4(n - 2) * 2;
+            }
+        }
+    }
+    // π = 3 + 4 / 2*3*4  - 4 / 4*5*6 + 4 / 6*7*8 - 4 / 8*9*10 ......
+    function array5(n) {
+        if (n == 1) {
+            return 3;
+        }
+        else {
+            var x = (n - 1) * 2;
+            return array5(n - 1) + 4 / (x * (x + 1) * (x + 2)) * Math.pow((-1), x);
+        }
+    }
+    var N, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入自然数N：")];
+            case 1:
+                N = _a.apply(void 0, [_b.sent()]);
+                console.log(array5(N));
+                console.log(Math.pow((-1), 2));
+                return [2 /*return*/];
+        }
+    });
+}); })();

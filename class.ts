@@ -1,5 +1,6 @@
 // 11B 上课题目
 import {input} from './utils'
+import { isArray } from 'util';
 
 //1. 质数
 
@@ -1095,5 +1096,143 @@ function simplify(N : number[]) { //分数化简
 // A   5    2   -6   -16  -20  -8
 // B   1   -3   -8   -10  -4   12
 (() => {
+    function A(n : number) {
+        if (n == 0) {
+            return 5
+        }
+        return 2 * B(n - 1)
+    }
 
+    function B(n : number) {
+        if (n == 0) {
+            return 1
+        }
+        return A(n) - A(n - 1)
+    }
+    console.log(A(5), B(5))
+});
+
+//8.4 打印数列 (展开打印 不要出现括号)
+// [10, 20, [1, 2], 80, [1, 3, [8, 4]]]
+(async () => {
+    let array = [10, 20, [1, 2], 80, [1, 3, [8, 4]]]
+    let str = ""
+    print(array)
+    console.log(str)
+
+    function print(array : any[]) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] instanceof Array) {
+                print(array[i])
+            } else {
+                str += array[i] + " "
+            }
+        }
+    }
+});
+
+//9.
+
+//9.1 求数列的前n项和(用递归的思路)
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log(S(list, 3))
+
+    function S(list : number[], n : number) {
+        if (n == 1) {
+            return list[0]
+        } else {
+            return S(list, n - 1) + list[n - 1]
+        }
+    }
+});
+
+//9.2 求数列的最大值 (递归的思路  第N项和第第N - 1项的关系)
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log(max(list, list.length))
+
+    function max(list : number[], n : number) {
+        if (n == 0) {
+            return list[0]
+        } else {
+            return Math.max(max(list, n - 1), list[n - 1])
+        }
+    }
+});
+
+//9.3 同时返回最大值和最小值
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    let list = randList(N)
+    printList(list)
+    console.log(maxAndMin(list, list.length))
+
+    function maxAndMin(list : number[], n : number) {
+        if (n == 0) {
+            return [list[0], list[0]]  //前面的是最大值 后面的是最小值
+        } else {
+            return [Math.max(maxAndMin(list, n - 1)[0], list[n - 1]), Math.min(maxAndMin(list, n - 1)[1], list[n - 1])] 
+        }
+    }
+});
+
+//9.4 定义一个函数 打印这个数列的n项的值
+(async () => {
+    let N = Number(await input("请输入自然数N："))
+    console.log(array5(N))
+
+    // 1  2  4  8  16  32  64  128 ......
+    function array1(n : number) {
+        if (n == 1) {
+            return 1
+        } else {
+            return 2 * array1(n - 1)
+        }
+    }
+
+    //1  2  4  7  11  16  22  29 ......
+    function array2(n : number) {
+        if (n == 1) {
+            return 1
+        } else {
+            return array2(n - 1) + n - 1
+        }
+    }
+
+    // 1  2  4  5  7  8  10  11  13  14  16  17
+    function array3(n : number) {
+        if (n == 1) {
+            return 1
+        } else {
+            return array3(n - 1) + n % 2 + 1
+        }
+    }
+
+    // 1  1  2  2  4  4  5  8  7
+    function array4(n : number) {
+        if (n == 1 || n == 2) {
+            return 1
+        } else {
+            if (n % 2 == 1) {
+                return array4(n - 2) + Math.floor((n + 1) / 2) % 2 + 1
+            } else {
+                return array4(n - 2) * 2
+            }
+        }
+    }
+
+    // π = 3 + 4 / 2*3*4  - 4 / 4*5*6 + 4 / 6*7*8 - 4 / 8*9*10 ......
+    function array5(n : number) {
+        if (n == 1) {
+            return 3
+        } else {
+            let x = (n - 1)
+            return array5(n - 1) + 4 / (x * (x + 1) * (x + 2)) * (-1) ** x  //TODO 处理正负号
+        }
+    }
 })();

@@ -1667,8 +1667,8 @@ function simplify(N) {
             return 3;
         }
         else {
-            var x = (n - 1) * 2;
-            return array5(n - 1) + 4 / (x * (x + 1) * (x + 2)) * Math.pow((-1), x);
+            var x = 2 * (n - 1);
+            return array5(n - 1) + 4 / (x * (x + 1) * (x + 2)) * Math.pow((-1), n);
         }
     }
     var N, _a;
@@ -1680,8 +1680,137 @@ function simplify(N) {
             case 1:
                 N = _a.apply(void 0, [_b.sent()]);
                 console.log(array5(N));
-                console.log(Math.pow((-1), 2));
                 return [2 /*return*/];
         }
     });
-}); })();
+}); });
+//9.5 用递归的方法求两个数的最大公约数  gcd(m, n)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function gcd(M, N) {
+        if (N == 0) {
+            return M;
+        }
+        else {
+            return gcd(N, M % N);
+        }
+    }
+    var M, _a, N, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入正整数M：")];
+            case 1:
+                M = _a.apply(void 0, [_c.sent()]);
+                _b = Number;
+                return [4 /*yield*/, utils_1.input("请输入正整数N：")];
+            case 2:
+                N = _b.apply(void 0, [_c.sent()]);
+                console.log(gcd(M, N));
+                return [2 /*return*/];
+        }
+    });
+}); });
+//9.6 广义表：这个列表中的元素可能还是列表 可以套多层
+// L = [32, 18, [1, 2], [3, [2, 5]], 7]
+//9.6.1 把列表中所有元素打印出来
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function print(L) {
+        for (var i = 0; i < L.length; i++) {
+            if (L[i] instanceof Array) {
+                print(L[i]);
+            }
+            else {
+                str += L[i] + " ";
+            }
+        }
+    }
+    var L, str;
+    return __generator(this, function (_a) {
+        L = [32, 18, [1, 2], [3, [2, 5]], 7];
+        str = "";
+        print(L);
+        console.log(str);
+        return [2 /*return*/];
+    });
+}); });
+//9.6.2 把列表中所有元素的和求出来(不用全局变量)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function S(L, n) {
+        if (n == 1) {
+            if (L[0] instanceof Array) {
+                return S(L[0], L[0].length);
+            }
+            else {
+                return L[0];
+            }
+        }
+        else {
+            if (L[n - 1] instanceof Array) {
+                return S(L, n - 1) + S(L[n - 1], L[n - 1].length);
+            }
+            else {
+                return S(L, n - 1) + L[n - 1];
+            }
+        }
+    }
+    var L;
+    return __generator(this, function (_a) {
+        L = [32, 18, [1, 2], [3, [2, 5]], 7];
+        console.log(S(L, L.length));
+        return [2 /*return*/];
+    });
+}); });
+// 9.6.3 求广义表中的最大值
+(function () {
+    var L = [32, 18, [1, 2], [3, [2, 5, 50]], 7];
+    console.log(max(L, L.length));
+    function max(L, n) {
+        if (n == 1) {
+            if (L[n - 1] instanceof Array) {
+                return max(L[n - 1], L[n - 1].length);
+            }
+            else {
+                return L[n - 1];
+            }
+        }
+        else {
+            if (L[n - 1] instanceof Array) {
+                return Math.max(max(L, n - 1), max(L[n - 1], L[n - 1].length));
+            }
+            else {
+                return Math.max(max(L, n - 1), L[n - 1]);
+            }
+        }
+    }
+});
+//9.6.4 生成一个广义表：
+//80%的概率往列表中加元素，这个元素50%的概率是一个列表
+//(如果概率在20%那部分 那这个列表就不再加元素了)
+//TODO 感觉有点奇怪
+(function () {
+    var L = [];
+    randList(L);
+    console.log(L);
+    function randList(L) {
+        if (rand() < 2) { //20%的概率不再加元素
+            return L;
+        }
+        else { //80%的概率往列表中加元素
+            var x = rand();
+            if (x < 5) {
+                L.push(x);
+                randList(L);
+            }
+            else { //这个元素50%的概率是一个列表
+                var y = [];
+                randList(y);
+                L.push(y);
+                randList(L);
+            }
+        }
+    }
+    function rand() {
+        return Number(Math.floor(10 * Math.random()));
+    }
+})();

@@ -1231,8 +1231,119 @@ function simplify(N : number[]) { //分数化简
         if (n == 1) {
             return 3
         } else {
-            let x = (n - 1)
-            return array5(n - 1) + 4 / (x * (x + 1) * (x + 2)) * (-1) ** x  //TODO 处理正负号
+            let x = 2 * (n - 1)
+            return array5(n - 1) + 4 / (x * (x + 1) * (x + 2)) * (-1) ** n
         }
+    }
+});
+
+//9.5 用递归的方法求两个数的最大公约数  gcd(m, n)
+(async () => {
+    let M = Number(await input("请输入正整数M："))
+    let N = Number(await input("请输入正整数N："))
+    console.log(gcd(M, N))
+
+    function gcd(M : number, N : number) {
+        if (N == 0) {
+            return M
+        } else {
+            return gcd(N, M % N)
+        }
+    }
+});
+
+//9.6 广义表：这个列表中的元素可能还是列表 可以套多层
+// L = [32, 18, [1, 2], [3, [2, 5]], 7]
+
+//9.6.1 把列表中所有元素打印出来
+(async () => {
+    let L = [32, 18, [1, 2], [3, [2, 5]], 7]
+    let str  = ""
+    print(L)
+    console.log(str)
+
+    function print(L : any[]) {
+        for (let i = 0; i < L.length; i++) {
+            if (L[i] instanceof Array) {
+                print(L[i])
+            } else {
+                str += L[i] + " "
+            }
+        }
+    }
+});
+
+//9.6.2 把列表中所有元素的和求出来(不用全局变量)
+(async () => {
+    let L = [32, 18, [1, 2], [3, [2, 5]], 7]
+    console.log(S(L, L.length))
+
+    function S(L : any[], n : number) {
+        if (n == 1) {
+            if (L[0] instanceof Array) {
+                return S(L[0], L[0].length)
+            } else {
+                return L[0]
+            }
+        } else {
+            if (L[n - 1] instanceof Array) {
+                return S(L, n - 1) + S(L[n - 1], L[n - 1].length)
+            } else {
+                return S(L, n - 1) + L[n - 1]
+            }
+        }
+    }
+});
+
+// 9.6.3 求广义表中的最大值
+(() => {
+    let L = [32, 18, [1, 2], [3, [2, 5, 50]], 7]
+    console.log(max(L, L.length))
+
+    function max(L : any[], n ) {
+        if (n == 1) {
+            if (L[n - 1] instanceof Array) {
+                return max(L[n - 1], L[n - 1].length)
+            } else {
+                return L[n - 1]
+            }
+        } else {
+            if (L[n - 1] instanceof Array) {
+                return Math.max(max(L, n - 1), max(L[n - 1], L[n - 1].length))
+            } else {
+                return Math.max(max(L, n - 1), L[n - 1])
+            }
+        }
+    }
+});
+
+//9.6.4 生成一个广义表：
+//80%的概率往列表中加元素，这个元素50%的概率是一个列表
+//(如果概率在20%那部分 那这个列表就不再加元素了)
+//TODO 感觉有点奇怪
+(() => {
+    let L = []
+    randList(L)
+    console.log(L)
+
+    function randList(L : any[]) {
+        if (rand() < 2) { //20%的概率不再加元素
+            return L
+        } else { //80%的概率往列表中加元素
+            let x = rand()
+            if (x < 5) {
+                L.push(x)
+                randList(L)
+            } else { //这个元素50%的概率是一个列表
+                let y :number[] = []
+                randList(y)
+                L.push(y)
+                randList(L)
+            }
+        }
+    }
+
+    function rand() {
+        return Number(Math.floor(10 * Math.random()))
     }
 })();

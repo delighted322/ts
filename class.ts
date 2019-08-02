@@ -1320,24 +1320,28 @@ function simplify(N : number[]) { //分数化简
 //9.6.4 生成一个广义表：
 //80%的概率往列表中加元素，这个元素50%的概率是一个列表
 //(如果概率在20%那部分 那这个列表就不再加元素了)
-//TODO 感觉有点奇怪
+//TODO 还有一些问题 再看看 感觉有点奇怪 
 (() => {
     let L = []
     randList(L)
+    // JSON.stringify(L)
     console.log(L)
 
     function randList(L : any[]) {
         if (rand() < 2) { //20%的概率不再加元素
+            console.log('不加了')
             return L
         } else { //80%的概率往列表中加元素
             let x = rand()
             if (x < 5) {
                 L.push(x)
+                console.log('加了一个元素')
                 randList(L)
             } else { //这个元素50%的概率是一个列表
                 let y :number[] = []
                 randList(y)
                 L.push(y)
+                console.log("加了一个列表")
                 randList(L)
             }
         }
@@ -1347,3 +1351,131 @@ function simplify(N : number[]) { //分数化简
         return Number(Math.floor(10 * Math.random()))
     }
 })();
+
+// 9.6.5 求广义表里面最长的子列表的长度
+(async () => {
+    let L = [2, 3, [2, 3, 4, 5, 6], 1, 2, 3]
+    console.log(maxLength(L, L.length))
+
+    function maxLength(L : any[], n : number) {
+        if (n == 1) {
+            if (L[0] instanceof Array) {
+                return maxLength(L[0], L[0].length)
+            } else {
+                return 1
+            }
+        } else {
+            if (L[n - 1] instanceof Array) {
+                let max =  Math.max(maxLength(L, n - 1), maxLength(L[n -1], L[n - 1].length))
+                return Math.max(max, n)
+            } else {
+                return Math.max(maxLength(L, n - 1), n)
+            }
+        }
+    }
+});
+
+// 10. 字符串
+// let a = "hello"
+// console.log(a[0])  // 把字符串看成列表
+
+
+// let s = input()  //长的
+// let c = input() //只有一个字符
+// 10.1 打印c在s中出现的第一个位置
+(async () => {
+    let s = String(await input("请输入字符串s："))
+    let c = await input("请输入字符c：")
+
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] == c) {
+            console.log(i)
+            return
+        }
+    }
+});
+
+//10.2  打印这个字符在字符串中出现的次数
+(async () => {
+    let s = String(await input("请输入字符串s："))
+    let c = await input("请输入字符c：")
+
+    let count = 0
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] == c) {
+            count++
+        }
+    }
+    console.log(count)
+});
+
+//10.3 短的字符串不只是一个字符 输出第一次出现的位置
+(async () => {
+    let s = String(await input("请输入字符串s："))
+    let c = String(await input("请输入字符c："))
+
+    for (let i = 0; i < s.length; i++) {
+        let index = i
+        let flag = true
+        for (let j = 0; j < c.length; j++) {
+            if (c[j] != s[i]) {
+                flag = false
+                break
+            }
+            i++
+        }
+        if (flag) {
+            console.log(index)
+            return
+        }
+        i = index
+    }
+});
+
+//10.4 在长字符串中删掉短字符串中的字符 (字符串的加法) hello , l => heo 
+(async () => {
+    let s = String(await input("请输入字符串s："))
+    let c = String(await input("请输入字符c："))
+
+    let str = ""
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] != c) {
+            str += s[i]
+        }
+    }
+    console.log(str)
+});
+
+//10.5 字符串替换  abcabdabe  把ab替换成xy
+//10.5.1 这一种有点丑
+(async () => {
+    let s = String(await input("请输入字符串s：")) //原字符串
+    let x = String(await input("请输入字符x：")) //要被替换的字符串
+    let y = String(await input("请输入字符y：")) //替换的字符串
+
+    let str = ""
+    for (let i = 0; i < s.length; i++) {
+        let index = i
+        let flag = true
+        for (let j = 0; j < x.length; j++) {
+            if (x[j] != s[i]) {
+                flag = false
+                break
+            }
+            i++
+        }
+        if (flag) {
+            str += y
+            i = index + x.length - 1
+            continue
+        }
+        str += s[index]
+        i = index
+    }
+    console.log(str)
+});
+
+//10.5.2 每次判断开头两次字母是不是ab 是的就替换 并且继续去查后面部分开头是不是ab   (递归  s[2:])
+(async () => {
+
+});

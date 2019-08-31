@@ -1787,14 +1787,14 @@ function simplify(N) {
 //9.6.4 生成一个广义表：
 //80%的概率往列表中加元素，这个元素50%的概率是一个列表
 //(如果概率在20%那部分 那这个列表就不再加元素了)
-//TODO 感觉有点奇怪
+//TODO 还有一些问题 再看看 感觉有点奇怪 
 (function () {
     var L = [];
     randList(L);
     // JSON.stringify(L)
     console.log(L);
     function randList(L) {
-        if (rand() < 4) { //20%的概率不再加元素
+        if (rand() < 2) { //20%的概率不再加元素
             console.log('不加了');
             return L;
         }
@@ -1817,7 +1817,7 @@ function simplify(N) {
     function rand() {
         return Number(Math.floor(10 * Math.random()));
     }
-})();
+});
 // 9.6.5 求广义表里面最长的子列表的长度
 (function () { return __awaiter(_this, void 0, void 0, function () {
     function maxLength(L, n) {
@@ -2003,9 +2003,153 @@ function simplify(N) {
         }
     });
 }); });
-//10.5.2 每次判断开头两次字母是不是ab 是的就替换 并且继续去查后面部分开头是不是ab   (递归  s[2:])
+//10.5.2 每次判断开头两个字母是不是ab 是的就替换 并且继续去查后面部分开头是不是ab   (递归  s[2:])
 (function () { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/];
+    function replace(s) {
+        if (s.length < x.length) {
+            str += s;
+            return str;
+        }
+        if (x == s.slice(0, x.length)) {
+            str += y;
+            replace(s.slice(x.length, s.length)); //s.slice(start, end) 左闭右开
+        }
+        else {
+            str += s[0];
+            replace(s.slice(1, s.length));
+        }
+    }
+    var s, _a, x, _b, y, _c, str;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                _a = String;
+                return [4 /*yield*/, utils_1.input("请输入字符串s：")];
+            case 1:
+                s = _a.apply(void 0, [_d.sent()]) //原字符串
+                ;
+                _b = String;
+                return [4 /*yield*/, utils_1.input("请输入字符x：")];
+            case 2:
+                x = _b.apply(void 0, [_d.sent()]) //要被替换的字符串
+                ;
+                _c = String;
+                return [4 /*yield*/, utils_1.input("请输入字符y：")];
+            case 3:
+                y = _c.apply(void 0, [_d.sent()]) //替换的字符串
+                ;
+                str = "";
+                replace(s);
+                console.log(str);
+                return [2 /*return*/];
+        }
     });
 }); });
+//10.6 判断一个字符串是不是对称的
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var str, _a, flag, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = String;
+                return [4 /*yield*/, utils_1.input("请输入一个字符串:")];
+            case 1:
+                str = _a.apply(void 0, [_b.sent()]);
+                flag = true;
+                for (i = 0; i < str.length / 2; i++) {
+                    if (str[i] != str[str.length - 1 - i]) {
+                        flag = false;
+                        break;
+                    }
+                }
+                console.log(flag);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//10.7 找到字符串中第一个不重复的字符   // ababcde  -> c
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var str, _a, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = String;
+                return [4 /*yield*/, utils_1.input("请输入字符串：")];
+            case 1:
+                str = _a.apply(void 0, [_b.sent()]);
+                for (i = 0; i < str.length; i++) {
+                    if (str.indexOf(str[i]) == str.lastIndexOf(str[i])) {
+                        console.log(str[i]);
+                        return [2 /*return*/];
+                    }
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//10.8 把一个大小写混合的句子变成全大写
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var str, _a, result, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = String;
+                return [4 /*yield*/, utils_1.input("请输入一个包含大小写字母的字符串：")];
+            case 1:
+                str = _a.apply(void 0, [_b.sent()]);
+                result = "";
+                for (i = 0; i < str.length; i++) {
+                    if (str[i].charCodeAt(0) > "Z".charCodeAt(0)) {
+                        result += String.fromCharCode(str[i].charCodeAt(0) - ("a".charCodeAt(0) - "A".charCodeAt(0)));
+                        continue;
+                    }
+                    result += str[i];
+                }
+                console.log(result);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//10.9 def atoi   把"1234"变成1234
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var str, _a, list, i, p, result, i;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = String;
+                return [4 /*yield*/, utils_1.input("请输入一串数字：")];
+            case 1:
+                str = _a.apply(void 0, [_b.sent()]);
+                list = [];
+                for (i = 0; i < str.length; i++) {
+                    list.push(str[i].charCodeAt(0) - "0".charCodeAt(0));
+                }
+                p = 1;
+                result = 0;
+                for (i = list.length - 1; i >= 0; i--) {
+                    result += list[i] * p;
+                    p *= 10;
+                }
+                console.log(result);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//10.10 91876876  写一个数字(不超过10亿)  写出这个数的中文读法
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var num, _a, splited, list;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = String;
+                return [4 /*yield*/, utils_1.input("请输入一个不超过10亿的数字：")];
+            case 1:
+                num = _a.apply(void 0, [_b.sent()]);
+                splited = num.split("");
+                list = ["个", "十", "百", "千", "万", "十万", "百万", "千万", "亿", "十亿"];
+                splited = splited.reverse();
+                console.log(splited);
+                return [2 /*return*/];
+        }
+    });
+}); })();

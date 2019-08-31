@@ -1,6 +1,7 @@
 // 11B 上课题目
 import {input} from './utils'
 import { isArray } from 'util';
+import { O_RDONLY, DH_UNABLE_TO_CHECK_GENERATOR } from 'constants';
 
 //1. 质数
 
@@ -1350,7 +1351,7 @@ function simplify(N : number[]) { //分数化简
     function rand() {
         return Number(Math.floor(10 * Math.random()))
     }
-})();
+});
 
 // 9.6.5 求广义表里面最长的子列表的长度
 (async () => {
@@ -1475,7 +1476,93 @@ function simplify(N : number[]) { //分数化简
     console.log(str)
 });
 
-//10.5.2 每次判断开头两次字母是不是ab 是的就替换 并且继续去查后面部分开头是不是ab   (递归  s[2:])
+//10.5.2 每次判断开头两个字母是不是ab 是的就替换 并且继续去查后面部分开头是不是ab   (递归  s[2:])
 (async () => {
+    let s = String(await input("请输入字符串s：")) //原字符串
+    let x = String(await input("请输入字符x：")) //要被替换的字符串
+    let y = String(await input("请输入字符y：")) //替换的字符串
+
+    let str = ""
+    function replace(s : string) {
+        if (s.length < x.length) {
+            str += s
+            return str
+        }
+        if (x == s.slice(0, x.length)) {
+            str += y
+            replace(s.slice(x.length, s.length)) //s.slice(start, end) 左闭右开
+        } else {
+            str += s[0]
+            replace(s.slice(1, s.length))
+        }
+    }
+    replace(s)
+    console.log(str)
+});
+
+//10.6 判断一个字符串是不是对称的
+(async () => {
+    let str = String(await input("请输入一个字符串:"))
+    let flag = true
+    for (let i = 0; i < str.length / 2; i++) {
+        if (str[i] != str[str.length - 1 - i]) {
+            flag = false
+            break
+        }
+    }
+    console.log(flag)
+});
+
+//10.7 找到字符串中第一个不重复的字符   // ababcde  -> c
+(async () => {
+    let str = String(await input("请输入字符串："))
+
+    for (let i = 0; i < str.length; i++) {
+        if (str.indexOf(str[i]) == str.lastIndexOf(str[i])) {
+            console.log(str[i])
+            return
+        }
+    }
 
 });
+
+//10.8 把一个大小写混合的句子变成全大写
+(async () => {
+    let str = String(await input("请输入一个包含大小写字母的字符串："))
+    let result = ""
+    for (let i = 0; i < str.length; i++) {
+        if (str[i].charCodeAt(0) > "Z".charCodeAt(0)) {
+            result += String.fromCharCode(str[i].charCodeAt(0) - ("a".charCodeAt(0) - "A".charCodeAt(0)))
+            continue
+        }
+        result += str[i]
+    }
+    console.log(result)
+});
+
+//10.9 def atoi   把"1234"变成1234
+(async () => {
+    let str = String(await input("请输入一串数字："))
+    let list = []
+
+    for (let i = 0; i < str.length; i++) {
+        list.push(str[i].charCodeAt(0) - "0".charCodeAt(0))
+    }
+
+    let p = 1
+    let result = 0
+    for (let i = list.length - 1; i >=0; i--) {
+        result += list[i] * p
+        p *= 10
+    }
+    console.log(result)
+});
+
+//10.10 91876876  写一个数字(不超过10亿)  写出这个数的中文读法
+(async () => {
+    let num = String(await input("请输入一个不超过10亿的数字："))
+    let splited = num.split("")
+    let list = ["个", "十", "百", "千", "万", "十万", "百万", "千万", "亿", "十亿"]
+    splited = splited.reverse()    
+    console.log(splited)
+})();

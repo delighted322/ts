@@ -1,7 +1,5 @@
 // 11B 上课题目
 import {input} from './utils'
-import { isArray } from 'util';
-import { O_RDONLY, DH_UNABLE_TO_CHECK_GENERATOR, EILSEQ } from 'constants';
 
 //1. 质数
 

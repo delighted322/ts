@@ -2136,6 +2136,7 @@ function simplify(N) {
     });
 }); });
 //10.10 91876876  写一个数字(不超过10亿)  写出这个数的中文读法
+//TODO
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var num, _a, splited, list;
     return __generator(this, function (_b) {
@@ -2152,4 +2153,504 @@ function simplify(N) {
                 return [2 /*return*/];
         }
     });
+}); });
+//11
+//11.1 打印矩阵 输入一个数字n 打印n行n列的矩阵 
+// n = 5
+//打印
+// 0 1 2 3 4
+// 1 2 3 4 5
+// 2 3 4 5 6
+// 3 4 5 6 7
+// 4 5 6 7 8
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var n, _a, i, str, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数n：")];
+            case 1:
+                n = _a.apply(void 0, [_b.sent()]);
+                for (i = 0; i < n; i++) {
+                    str = "";
+                    for (j = i; j < i + n; j++) {
+                        str += j + " ";
+                    }
+                    console.log(str);
+                }
+                return [2 /*return*/];
+        }
+    });
+}); });
+//11.2 把矩阵放到列表里
+//[
+//  [0, 1, 2, 3, 4],
+//  [1, 3, 4, 4, 5],
+//  [2, 3, 4, 5, 6],
+//  [3, 4, 5, 6, 7],
+//  [4, 5, 6, 7, 8]
+//]
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var n, _a, list, i, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数n：")];
+            case 1:
+                n = _a.apply(void 0, [_b.sent()]);
+                list = [];
+                for (i = 0; i < n; i++) {
+                    list.push([]);
+                    for (j = i; j < i + n; j++) {
+                        list[i].push(j);
+                    }
+                }
+                console.log(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//11.3 定义一个函数 将二维列表打印成矩阵(每个数字占两格)
+/**
+ * 将输入的二维列表打印成矩阵
+ * @param list 要打印成矩阵的列表
+ */
+function printListToMatrix(list) {
+    for (var i = 0; i < list.length; i++) {
+        var str = "";
+        for (var j = 0; j < list[i].length; j++) {
+            str += list[i][j] + " ";
+        }
+        console.log(str);
+    }
+}
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var n, _a, list, i, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数n：")];
+            case 1:
+                n = _a.apply(void 0, [_b.sent()]);
+                list = [];
+                for (i = 0; i < n; i++) {
+                    list.push([]);
+                    for (j = i; j < i + n; j++) {
+                        list[i].push(j);
+                    }
+                }
+                printListToMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//11.4 定义一个函数 将矩阵中所有的奇数变成1 偶数变成0
+function changeTo0or1(list) {
+    for (var i = 0; i < list.length; i++) {
+        for (var j = 0; j < list[i].length; j++) {
+            list[i][j] = list[i][j] % 2 == 1 ? 1 : 0;
+        }
+    }
+}
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    var n, _a, list, i, j;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = Number;
+                return [4 /*yield*/, utils_1.input("请输入一个自然数n：")];
+            case 1:
+                n = _a.apply(void 0, [_b.sent()]);
+                list = [];
+                for (i = 0; i < n; i++) {
+                    list.push([]);
+                    for (j = i; j < i + n; j++) {
+                        list[i].push(j);
+                    }
+                }
+                printListToMatrix(list);
+                console.log("----------------");
+                changeTo0or1(list);
+                printListToMatrix(list);
+                return [2 /*return*/];
+        }
+    });
+}); });
+//11.5 定义一个函数 将矩阵左右翻转
+//TODO 前面好像做过
+//11.6 从[0, 0]开始将与1相邻的1变成2 如果被0隔开了就不变
+// [
+//     [1, 1, 1, 1, 1, 1, 0, 0, 0],
+//     [1, 1, 1, 0, 0, 0, 0, 1, 1],
+//     [1, 1, 1, 1, 0, 0, 1, 0, 1],
+//     [1, 0, 0, 1, 0, 1, 0, 0, 1],
+//     [0, 0, 1, 1, 0, 0, 0, 0, 0]
+// ]
+//将1四个方向周围能变成2的变成2 变成2地方的四个方向也能变成2的变成2 (递归)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    /**
+     * 把1周围能变成2的变成2 然后再递归地去找变成2的四个方向有哪些能变成2
+     * @param x
+     * @param y
+     * @param list
+     */
+    function change(x, y, list) {
+        list[x][y] = 2;
+        for (var _i = 0, dirs_1 = dirs; _i < dirs_1.length; _i++) {
+            var l = dirs_1[_i];
+            var xx = x + l[0];
+            var yy = y + l[1];
+            if (xx < 0 || xx > list.length - 1 || yy < 0 || yy > list[0].length - 1) {
+                continue;
+            }
+            if (list[xx][yy] == 1) {
+                list[xx][yy] = 2;
+                change(xx, yy, list);
+            }
+        }
+    }
+    var list, dirs;
+    return __generator(this, function (_a) {
+        list = [
+            [1, 1, 1, 1, 1, 1, 0, 0, 0],
+            [1, 1, 1, 0, 0, 0, 1, 1, 1],
+            [1, 1, 1, 1, 0, 0, 1, 0, 1],
+            [1, 0, 0, 1, 0, 1, 0, 0, 1],
+            [0, 1, 1, 1, 0, 0, 0, 0, 0]
+        ];
+        dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+        printListToMatrix(list);
+        change(2, 1, list);
+        console.log("******************");
+        printListToMatrix(list);
+        return [2 /*return*/];
+    });
+}); });
+//11.7 围棋 白子为1 黑子为2 空子为0 把死掉的白子拿掉变为0 (计算白子的气 1的旁边是0才是)
+//TODO
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/];
+    });
+}); });
+//11.8 走迷宫 从2出发走到3 1是通路 0是墙 用程序找到路
+// TODO
+// [
+//     [2, 1, 1, 1, 1, 1, 1, 1, 0],
+//     [1, 0, 1, 0, 1, 0, 0, 1, 1],
+//     [1, 1, 0, 1, 1, 1, 1, 0, 1],
+//     [1, 0, 0, 0, 0, 1, 0, 0, 0],
+//     [1, 1, 1, 1, 0, 1, 1, 1, 3]
+// ]
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    /**
+     * 判断这个点能不能到终点 true能到 false不能到
+     * @param x
+     * @param y
+     * @param list
+     */
+    function tryRoad(x, y, list) {
+        if (x < 0 || x >= list.length || y < 0 || y >= list[0].length) {
+            return false;
+        }
+        if (list[x][y] == 3) {
+            return true;
+        }
+        if (list[x][y] == 4) {
+            return false;
+        }
+        if (list[x][y] == 6) {
+            return true;
+        }
+        if (tryRoad(x + 1, y, list)) {
+            list[x + 1][y] = 6;
+            return true;
+        }
+        if (tryRoad(x - 1, y, list)) {
+            list[x - 1][y] = 6;
+            return true;
+        }
+        if (tryRoad(x, y - 1, list)) {
+            list[x][y - 1] = 6;
+            return true;
+        }
+        if (tryRoad(x, y + 1, list)) {
+            list[x][y + 1] = 6;
+            return true;
+        }
+        list[x][y] = 4;
+        return false;
+    }
+    var list, dirs;
+    return __generator(this, function (_a) {
+        list = [
+            [2, 1, 1, 1, 1, 1, 1, 1, 0],
+            [1, 0, 1, 0, 1, 0, 0, 1, 1],
+            [1, 1, 0, 1, 1, 1, 1, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 0, 0],
+            [1, 1, 1, 1, 0, 1, 1, 1, 3]
+        ];
+        dirs = [[0, 1], [0, -1], [1, 0], []];
+        printListToMatrix(list);
+        console.log(tryRoad(0, 0, list));
+        printListToMatrix(list);
+        return [2 /*return*/];
+    });
+}); });
+//12 递归
+//12.1 使用递归的方法 输入N 按顺序打印从1到N
+// 先打印从1到N-1  
+// 再打印N
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function printN(N) {
+        if (N == 1) {
+            console.log(N);
+        }
+        else {
+            printN(N - 1);
+            console.log(N);
+        }
+    }
+    return __generator(this, function (_a) {
+        printN(10);
+        return [2 /*return*/];
+    });
+}); });
+//12.2 使用递归的方法 输入N 计算从1到N的和
+// 计算从1到N - 1的和  
+// 再加上N返回
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function sum(N) {
+        if (N == 1) {
+            return 1;
+        }
+        else {
+            return sum(N - 1) + N;
+        }
+    }
+    return __generator(this, function (_a) {
+        console.log(sum(3));
+        return [2 /*return*/];
+    });
+}); });
+//12.3 使用递归的方法 找到列表L中的最大值
+// 找到列表前N - 1项的最大值  
+// 和第N项比较 返回比较大的
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function max(L, n) {
+        if (n == 1) {
+            return L[0];
+        }
+        else {
+            return Math.max(max(L, n - 1), L[n - 1]);
+        }
+    }
+    var L;
+    return __generator(this, function (_a) {
+        L = [4, 2, 6, 8, 11, 20, 3, 6, 14, 25];
+        console.log(max(L, L.length));
+        return [2 /*return*/];
+    });
+}); });
+//12.4 使用递归的方法 对列表进行选择排序
+// 找到列表前N - 1项的最大值 与列表最后一位交换 ?? 前N - 1项的话如果最大的数在最后会有点问题 应该是前N项的最大值
+// 同样方法排序前N - 1项
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function findMaxIndex(L, n) {
+        if (n == 1) {
+            return 0;
+        }
+        else {
+            return (L[findMaxIndex(L, n - 1)] > L[n - 1]) ? findMaxIndex(L, n - 1) : n - 1;
+        }
+    }
+    function selectSort(L, n) {
+        if (n > 2) {
+            var z = findMaxIndex(L, n);
+            var temp = L[n - 1];
+            L[n - 1] = L[z];
+            L[z] = temp;
+            // console.log(L)
+            selectSort(L, n - 1);
+        }
+        else {
+            if (L[0] > L[1]) {
+                var temp = L[0];
+                L[0] = L[1];
+                L[1] = temp;
+            }
+        }
+    }
+    var L;
+    return __generator(this, function (_a) {
+        L = [34, 2, 45, 10, 3, 10, 6, 20, 60];
+        console.log(L);
+        selectSort(L, L.length);
+        console.log(L);
+        return [2 /*return*/];
+    });
+}); });
+// 12.5 使用递归的方法 输入M和N 计算M和N的最大公约数
+//  gcd(M, N) = gcd(M % N, N)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function gcd(M, N) {
+        if (M == 0) {
+            return N;
+        }
+        if (M < N) {
+            var z = M;
+            M = N;
+            N = z;
+        }
+        M = M % N;
+        return gcd(M, N);
+    }
+    return __generator(this, function (_a) {
+        console.log(gcd(24, 126));
+        return [2 /*return*/];
+    });
+}); });
+// 12.6 使用递归的方法 计算斐波拉切数列的第N项
+//  F(n) = F(n - 1) + F(n - 2)
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function fibonacci(n) {
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+    return __generator(this, function (_a) {
+        console.log(fibonacci(7));
+        return [2 /*return*/];
+    });
+}); });
+// 12.7 使用递归的方法 在有序的列表中查找一个值(二分查找)
+// 看N / 2的位置是不是这个值
+// 不是的话 在合适为范围内查找
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function find(L, leftIndex, rightIndex, n) {
+        var index = Math.floor((leftIndex + rightIndex) / 2);
+        if (L[index] == n) {
+            return index;
+        }
+        else if (L[index] < n) {
+            return find(L, index, rightIndex, n);
+        }
+        else {
+            return find(L, leftIndex, index, n);
+        }
+    }
+    var L;
+    return __generator(this, function (_a) {
+        L = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        console.log(find(L, 0, L.length - 1, 4));
+        return [2 /*return*/];
+    });
+}); });
+// 12.8 使用递归的方法 扁平化一个广义表(列表套列表 改成一层)
+// 遍历每一个元素
+// 如果是列表 先扁平化子列表
+// 将扁平化的子列表和普通元素扁平化
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function simplifyList(L, res) {
+        for (var i = 0; i < L.length; i++) {
+            if (L[i] instanceof Array) {
+                simplifyList(L[i], res);
+            }
+            else {
+                res.push(L[i]);
+            }
+        }
+        return res;
+    }
+    var L, res;
+    return __generator(this, function (_a) {
+        L = [1, 2, [3, 4], [5, [6, 7]], 8, [9, [10, 11]]];
+        res = [];
+        console.log(L);
+        console.log(simplifyList(L, res));
+        return [2 /*return*/];
+    });
+}); });
+// 12.9 使用递归的方法 split一个字符串
+// split('a, bc, d, efg', ',') = ['a', 'bc', 'd', 'efg']
+// 找到一个分隔符 分成两个字符串
+// 将前面的字符串放入结果 递归处理后面的字符串
+//TODO 感觉这种写法不太像递归
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function mySplit(str, res) {
+        var x = '';
+        var flag = false; //false : 没有出现分隔符
+        for (var i = 0; i < str.length; i++) {
+            if (str[i] == ',') {
+                flag = true;
+                res.push(x);
+                mySplit(str.substring(i + 1), res);
+                break;
+            }
+            x += str[i];
+        }
+        if (!flag) {
+            res.push(x);
+            return;
+        }
+    }
+    var str, res;
+    return __generator(this, function (_a) {
+        str = 'a,bc,d,efg,h,ijk';
+        res = [];
+        mySplit(str, res);
+        console.log(res);
+        return [2 /*return*/];
+    });
+}); });
+// 12.10 使用递归的方法 找到一个矩阵中和最大的2 x 2子矩阵
+// 计算包含左上角元素的2 x 2的和
+// 递归找到不包含左上角元素的结果(两个矩阵)
+// TODO
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/];
+    });
+}); });
+// 12.11 使用递归的方法 打印杨辉三角形的第N行
+// 计算杨辉三角形的第N - 1行
+// 两两相加 返回第N行
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    /**
+     * 返回杨辉三角形中第n行第i个数的值
+     * @param n 第n行
+     * @param i 第i个
+     */
+    function pascalTriangle(n, i) {
+        if (i == 1 || i == n) {
+            return 1;
+        }
+        else {
+            return pascalTriangle(n - 1, i - 1) + pascalTriangle(n - 1, i);
+        }
+    }
+    /**
+     * 打印杨辉三角形中的第n行
+     * @param n
+     */
+    function printPascalTriangle(n) {
+        var str = "";
+        for (var i = 1; i <= n; i++) {
+            str += pascalTriangle(n, i) + " ";
+        }
+        console.log(str);
+    }
+    return __generator(this, function (_a) {
+        printPascalTriangle(7);
+        return [2 /*return*/];
+    });
 }); })();
+// 12.12 给出一个价格 用怪异国货币 2元 3元 和7元表示出来(一种方法即可)
+// 试试N - 2 N - 3和N - 7能否表示
+// 若能 加上2, 3, 7即可

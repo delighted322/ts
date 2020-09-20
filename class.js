@@ -104,7 +104,7 @@ var utils_1 = require("./utils");
                 for (i = 2; i < N / 2; i++) {
                     index = i + 1;
                     while (index <= N) {
-                        if ((array[index] != 0) && (array[index] % i == 0)) {
+                        if (array[index] != 0 && array[index] % i == 0) {
                             array[index] = 0;
                         }
                         index++;
@@ -179,10 +179,8 @@ var utils_1 = require("./utils");
                 return [4 /*yield*/, utils_1.input("输入一个自然数N: ")];
             case 2:
                 N = _b.apply(void 0, [_c.sent()]);
-                gcd = 2 //最大公约数
-                ;
-                lcm = Math.min(M, N) //最小公倍数
-                ;
+                gcd = 2;
+                lcm = Math.min(M, N);
                 for (i = 2; i <= Math.min(M, N); i++) {
                     if (M % i == 0 && N % i == 0) {
                         gcd = i;
@@ -223,7 +221,7 @@ var utils_1 = require("./utils");
                     N = temp;
                 }
                 console.log("最大公约数：", M);
-                lcm = initM * initN / M;
+                lcm = (initM * initN) / M;
                 console.log("最小公倍数", lcm);
                 return [2 /*return*/];
         }
@@ -252,7 +250,7 @@ var utils_1 = require("./utils");
                     N = Math.min(N, temp);
                 }
                 console.log("最大公约数：", M);
-                lcm = initM * initN / M;
+                lcm = (initM * initN) / M;
                 console.log("最小公倍数", lcm);
                 return [2 /*return*/];
         }
@@ -356,7 +354,7 @@ var utils_1 = require("./utils");
         }
     });
 }); });
-//2.7 输入一个数字组成的字符串表示循环小数，求等价的分数 
+//2.7 输入一个数字组成的字符串表示循环小数，求等价的分数
 //如 输入3 输出1/3
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var N, _a, i;
@@ -387,7 +385,8 @@ var utils_1 = require("./utils");
             case 1:
                 N = _a.apply(void 0, [_b.sent()]);
                 P = 0;
-                for (M = N + 1; M <= N * 2; M++) { // M、P ∈ [N + 1, N(N + 1)]
+                for (M = N + 1; M <= N * 2; M++) {
+                    // M、P ∈ [N + 1, N(N + 1)]
                     P = (M * N) / (M - N);
                     if (P % 1 == 0) {
                         console.log(M, P);
@@ -525,10 +524,8 @@ var utils_1 = require("./utils");
             array.push(Math.round(100 * Math.random()));
         }
         console.log(array);
-        odd = 0 //奇数
-        ;
-        even = 0 //偶数
-        ;
+        odd = 0;
+        even = 0;
         for (i = 0; i < array.length; i++) {
             if (array[i] % 2 == 0) {
                 even++;
@@ -612,7 +609,6 @@ function printMatrix(list) {
         console.log(str);
     }
 }
-;
 //4.2 求最大值以及它的下标
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var M, _a, N, _b, list, index, m, n;
@@ -622,13 +618,11 @@ function printMatrix(list) {
                 _a = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
             case 1:
-                M = _a.apply(void 0, [_c.sent()]) //行
-                ;
+                M = _a.apply(void 0, [_c.sent()]);
                 _b = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
             case 2:
-                N = _b.apply(void 0, [_c.sent()]) //列
-                ;
+                N = _b.apply(void 0, [_c.sent()]);
                 list = randMatrix(M, N);
                 printMatrix(list);
                 index = [0, 0];
@@ -654,13 +648,11 @@ function printMatrix(list) {
                 _a = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
             case 1:
-                M = _a.apply(void 0, [_c.sent()]) //行
-                ;
+                M = _a.apply(void 0, [_c.sent()]);
                 _b = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
             case 2:
-                N = _b.apply(void 0, [_c.sent()]) //列
-                ;
+                N = _b.apply(void 0, [_c.sent()]);
                 list = randMatrix(M, N);
                 printMatrix(list);
                 console.log("------------");
@@ -689,13 +681,11 @@ function printMatrix(list) {
                 _a = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
             case 1:
-                M = _a.apply(void 0, [_c.sent()]) //行
-                ;
+                M = _a.apply(void 0, [_c.sent()]);
                 _b = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
             case 2:
-                N = _b.apply(void 0, [_c.sent()]) //列
-                ;
+                N = _b.apply(void 0, [_c.sent()]);
                 list = randMatrix(M, N);
                 printMatrix(list);
                 console.log("-----------------------");
@@ -709,7 +699,7 @@ function printMatrix(list) {
                         y = i % N;
                     }
                     else {
-                        y = N - 1 - i % N;
+                        y = N - 1 - (i % N);
                     }
                     str += list[x][y] + " ";
                     index++;
@@ -734,13 +724,11 @@ function printMatrix(list) {
                 _a = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
             case 1:
-                M = _a.apply(void 0, [_c.sent()]) //行
-                ;
+                M = _a.apply(void 0, [_c.sent()]);
                 _b = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
             case 2:
-                N = _b.apply(void 0, [_c.sent()]) //列
-                ;
+                N = _b.apply(void 0, [_c.sent()]);
                 list = randMatrix(M, N);
                 printMatrix(list);
                 console.log("-----------------------");
@@ -748,7 +736,7 @@ function printMatrix(list) {
                 y = 0;
                 str = "";
                 for (i = 0; i < M + N; i++) {
-                    while ((x >= 0 && x < M) && (y >= 0 && y < N)) {
+                    while (x >= 0 && x < M && y >= 0 && y < N) {
                         str += list[x][y] + " ";
                         x += 1;
                         y -= 1;
@@ -777,13 +765,11 @@ function printMatrix(list) {
                 _a = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数M：")];
             case 1:
-                M = _a.apply(void 0, [_c.sent()]) //行
-                ;
+                M = _a.apply(void 0, [_c.sent()]);
                 _b = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
             case 2:
-                N = _b.apply(void 0, [_c.sent()]) //列
-                ;
+                N = _b.apply(void 0, [_c.sent()]);
                 list = randMatrix(M, N);
                 printMatrix(list);
                 max = 0;
@@ -1186,7 +1172,8 @@ function printList(list) {
                 c = [];
                 d = [];
                 for (i = 0; i < Math.floor(M / 2); i++) {
-                    for (j = 0; j < Math.floor((N + 1) / 2); j++) { // a    d
+                    for (j = 0; j < Math.floor((N + 1) / 2); j++) {
+                        // a    d
                         a = [i, j]; // b    c
                         b = [N - 1 - j, i];
                         c = [N - 1 - b[1], b[0]];
@@ -1235,7 +1222,7 @@ function printList(list) {
     });
 }); });
 //7.1.2 不用循环 用if判断 将3个数用选择排序的方法排序
-//TODO 
+//TODO
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var N, _a, list;
     return __generator(this, function (_b) {
@@ -1283,6 +1270,7 @@ function printList(list) {
 }); });
 // 排序规则 奇数比偶数小 奇数偶数分别排序
 function myCompare(M, N) {
+    //false: M < N   true: M > N
     if ((M + N) % 2 == 0) {
         return M > N ? true : false;
     }
@@ -1304,7 +1292,7 @@ function myCompare(M, N) {
                 list = randList(N);
                 printList(list);
                 console.log("----------------");
-                for (i = 1; i < list.length; i++) { //i是无序部分的第一个数的下标
+                for (i = 1; i < list.length; i++) {
                     index = i;
                     for (j = i - 1; j >= 0; j--) {
                         if (list[index] < list[j]) {
@@ -1324,7 +1312,7 @@ function myCompare(M, N) {
     });
 }); });
 //7.2.2 不用循环 用if判断 将3个数用选择排序的方法排序
-//TODO 
+//TODO
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var N, _a, list;
     return __generator(this, function (_b) {
@@ -1402,7 +1390,7 @@ function myCompare(M, N) {
     });
 }); });
 //7.3.2 不用循环 用if判断 将3个数用冒泡排序的方法排序
-//TODO 
+//TODO
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var N, _a, list;
     return __generator(this, function (_b) {
@@ -1449,18 +1437,23 @@ function myCompare(M, N) {
 //8. 递归
 //8.1 定义四个函数 分别是分数的加减乘除
 function plus(X, Y) {
+    //加  x : [x0, x1]   y : [y0, y1]
     return simplify([X[0] * Y[1] + Y[0] * X[1], X[1] * Y[1]]);
 }
 function minus(X, Y) {
+    //减
     return simplify([X[0] * Y[1] - Y[0] * X[1], X[1] * Y[1]]);
 }
 function multiply(X, Y) {
+    //乘
     return simplify([X[0] * Y[0], X[1] * Y[1]]);
 }
 function divide(X, Y) {
+    //除
     return simplify([X[0] * Y[1], X[1] * Y[0]]);
 }
 function simplify(N) {
+    //分数化简
     var gcd = 1;
     var x = N[0];
     var y = N[1];
@@ -1484,7 +1477,7 @@ function simplify(N) {
         }
         else {
             //return divide(result(N - 1)[0] + result(N - 1)[1], result(N - 1)[0]) //这样递归出不来
-            return (1 + 1 / result(N - 1));
+            return 1 + 1 / result(N - 1);
         }
     }
     var N, _a;
@@ -1494,8 +1487,7 @@ function simplify(N) {
                 _a = Number;
                 return [4 /*yield*/, utils_1.input("请输入一个自然数N：")];
             case 1:
-                N = _a.apply(void 0, [_b.sent()]) //N表示有几层x
-                ;
+                N = _a.apply(void 0, [_b.sent()]);
                 console.log(result(N));
                 return [2 /*return*/];
         }
@@ -1600,7 +1592,10 @@ function simplify(N) {
             return [list[0], list[0]]; //前面的是最大值 后面的是最小值
         }
         else {
-            return [Math.max(maxAndMin(list, n - 1)[0], list[n - 1]), Math.min(maxAndMin(list, n - 1)[1], list[n - 1])];
+            return [
+                Math.max(maxAndMin(list, n - 1)[0], list[n - 1]),
+                Math.min(maxAndMin(list, n - 1)[1], list[n - 1])
+            ];
         }
     }
     var N, _a, list;
@@ -1644,7 +1639,7 @@ function simplify(N) {
             return 1;
         }
         else {
-            return array3(n - 1) + n % 2 + 1;
+            return array3(n - 1) + (n % 2) + 1;
         }
     }
     // 1  1  2  2  4  4  5  8  7
@@ -1654,7 +1649,7 @@ function simplify(N) {
         }
         else {
             if (n % 2 == 1) {
-                return array4(n - 2) + Math.floor((n + 1) / 2) % 2 + 1;
+                return array4(n - 2) + (Math.floor((n + 1) / 2) % 2) + 1;
             }
             else {
                 return array4(n - 2) * 2;
@@ -1668,7 +1663,7 @@ function simplify(N) {
         }
         else {
             var x = 2 * (n - 1);
-            return array5(n - 1) + 4 / (x * (x + 1) * (x + 2)) * Math.pow((-1), n);
+            return array5(n - 1) + (4 / (x * (x + 1) * (x + 2))) * Math.pow((-1), n);
         }
     }
     var N, _a;
@@ -1787,25 +1782,28 @@ function simplify(N) {
 //9.6.4 生成一个广义表：
 //80%的概率往列表中加元素，这个元素50%的概率是一个列表
 //(如果概率在20%那部分 那这个列表就不再加元素了)
-//TODO 还有一些问题 再看看 感觉有点奇怪 
+//TODO 还有一些问题 再看看 感觉有点奇怪
 (function () {
     var L = [];
     randList(L);
     // JSON.stringify(L)
     console.log(L);
     function randList(L) {
-        if (rand() < 2) { //20%的概率不再加元素
-            console.log('不加了');
+        if (rand() < 2) {
+            //20%的概率不再加元素
+            console.log("不加了");
             return L;
         }
-        else { //80%的概率往列表中加元素
+        else {
+            //80%的概率往列表中加元素
             var x = rand();
             if (x < 5) {
                 L.push(x);
-                console.log('加了一个元素');
+                console.log("加了一个元素");
                 randList(L);
             }
-            else { //这个元素50%的概率是一个列表
+            else {
+                //这个元素50%的概率是一个列表
                 var y = [];
                 randList(y);
                 L.push(y);
@@ -1932,7 +1930,7 @@ function simplify(N) {
         }
     });
 }); });
-//10.4 在长字符串中删掉短字符串中的字符 (字符串的加法) hello , l => heo 
+//10.4 在长字符串中删掉短字符串中的字符 (字符串的加法) hello , l => heo
 (function () { return __awaiter(_this, void 0, void 0, function () {
     var s, _a, c, _b, str, i;
     return __generator(this, function (_c) {
@@ -1967,18 +1965,15 @@ function simplify(N) {
                 _a = String;
                 return [4 /*yield*/, utils_1.input("请输入字符串s：")];
             case 1:
-                s = _a.apply(void 0, [_d.sent()]) //原字符串
-                ;
+                s = _a.apply(void 0, [_d.sent()]);
                 _b = String;
                 return [4 /*yield*/, utils_1.input("请输入字符x：")];
             case 2:
-                x = _b.apply(void 0, [_d.sent()]) //要被替换的字符串
-                ;
+                x = _b.apply(void 0, [_d.sent()]);
                 _c = String;
                 return [4 /*yield*/, utils_1.input("请输入字符y：")];
             case 3:
-                y = _c.apply(void 0, [_d.sent()]) //替换的字符串
-                ;
+                y = _c.apply(void 0, [_d.sent()]);
                 str = "";
                 for (i = 0; i < s.length; i++) {
                     index = i;
@@ -2026,18 +2021,15 @@ function simplify(N) {
                 _a = String;
                 return [4 /*yield*/, utils_1.input("请输入字符串s：")];
             case 1:
-                s = _a.apply(void 0, [_d.sent()]) //原字符串
-                ;
+                s = _a.apply(void 0, [_d.sent()]);
                 _b = String;
                 return [4 /*yield*/, utils_1.input("请输入字符x：")];
             case 2:
-                x = _b.apply(void 0, [_d.sent()]) //要被替换的字符串
-                ;
+                x = _b.apply(void 0, [_d.sent()]);
                 _c = String;
                 return [4 /*yield*/, utils_1.input("请输入字符y：")];
             case 3:
-                y = _c.apply(void 0, [_d.sent()]) //替换的字符串
-                ;
+                y = _c.apply(void 0, [_d.sent()]);
                 str = "";
                 replace(s);
                 console.log(str);
@@ -2147,7 +2139,18 @@ function simplify(N) {
             case 1:
                 num = _a.apply(void 0, [_b.sent()]);
                 splited = num.split("");
-                list = ["个", "十", "百", "千", "万", "十万", "百万", "千万", "亿", "十亿"];
+                list = [
+                    "个",
+                    "十",
+                    "百",
+                    "千",
+                    "万",
+                    "十万",
+                    "百万",
+                    "千万",
+                    "亿",
+                    "十亿"
+                ];
                 splited = splited.reverse();
                 console.log(splited);
                 return [2 /*return*/];
@@ -2155,7 +2158,7 @@ function simplify(N) {
     });
 }); });
 //11
-//11.1 打印矩阵 输入一个数字n 打印n行n列的矩阵 
+//11.1 打印矩阵 输入一个数字n 打印n行n列的矩阵
 // n = 5
 //打印
 // 0 1 2 3 4
@@ -2321,7 +2324,12 @@ function changeTo0or1(list) {
             [1, 0, 0, 1, 0, 1, 0, 0, 1],
             [0, 1, 1, 1, 0, 0, 0, 0, 0]
         ];
-        dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+        dirs = [
+            [1, 0],
+            [-1, 0],
+            [0, 1],
+            [0, -1]
+        ];
         printListToMatrix(list);
         change(2, 1, list);
         console.log("******************");
@@ -2331,11 +2339,9 @@ function changeTo0or1(list) {
 }); });
 //11.7 围棋 白子为1 黑子为2 空子为0 把死掉的白子拿掉变为0 (计算白子的气 1的旁边是0才是)
 //TODO
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/];
-    });
-}); });
+(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/];
+}); }); });
 //11.8 走迷宫 从2出发走到3 1是通路 0是墙 用程序找到路
 // TODO
 // [
@@ -2402,7 +2408,7 @@ function changeTo0or1(list) {
 }); });
 //12 递归
 //12.1 使用递归的方法 输入N 按顺序打印从1到N
-// 先打印从1到N-1  
+// 先打印从1到N-1
 // 再打印N
 (function () { return __awaiter(_this, void 0, void 0, function () {
     function printN(N) {
@@ -2420,7 +2426,7 @@ function changeTo0or1(list) {
     });
 }); });
 //12.2 使用递归的方法 输入N 计算从1到N的和
-// 计算从1到N - 1的和  
+// 计算从1到N - 1的和
 // 再加上N返回
 (function () { return __awaiter(_this, void 0, void 0, function () {
     function sum(N) {
@@ -2437,7 +2443,7 @@ function changeTo0or1(list) {
     });
 }); });
 //12.3 使用递归的方法 找到列表L中的最大值
-// 找到列表前N - 1项的最大值  
+// 找到列表前N - 1项的最大值
 // 和第N项比较 返回比较大的
 (function () { return __awaiter(_this, void 0, void 0, function () {
     function max(L, n) {
@@ -2464,7 +2470,9 @@ function changeTo0or1(list) {
             return 0;
         }
         else {
-            return (L[findMaxIndex(L, n - 1)] > L[n - 1]) ? findMaxIndex(L, n - 1) : n - 1;
+            return L[findMaxIndex(L, n - 1)] > L[n - 1]
+                ? findMaxIndex(L, n - 1)
+                : n - 1;
         }
     }
     function selectSort(L, n) {
@@ -2584,10 +2592,10 @@ function changeTo0or1(list) {
 //TODO 感觉这种写法不太像递归
 (function () { return __awaiter(_this, void 0, void 0, function () {
     function mySplit(str, res) {
-        var x = '';
+        var x = "";
         var flag = false; //false : 没有出现分隔符
         for (var i = 0; i < str.length; i++) {
-            if (str[i] == ',') {
+            if (str[i] == ",") {
                 flag = true;
                 res.push(x);
                 mySplit(str.substring(i + 1), res);
@@ -2602,7 +2610,7 @@ function changeTo0or1(list) {
     }
     var str, res;
     return __generator(this, function (_a) {
-        str = 'a,bc,d,efg,h,ijk';
+        str = "a,bc,d,efg,h,ijk";
         res = [];
         mySplit(str, res);
         console.log(res);
@@ -2613,14 +2621,13 @@ function changeTo0or1(list) {
 // 计算包含左上角元素的2 x 2的和
 // 递归找到不包含左上角元素的结果(两个矩阵)
 // TODO
-(function () { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        return [2 /*return*/];
-    });
-}); });
+(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+    return [2 /*return*/];
+}); }); });
 // 12.11 使用递归的方法 打印杨辉三角形的第N行
 // 计算杨辉三角形的第N - 1行
 // 两两相加 返回第N行
+// TODO 不确定这种做法是不是按照上面的思路来的
 (function () { return __awaiter(_this, void 0, void 0, function () {
     /**
      * 返回杨辉三角形中第n行第i个数的值
@@ -2650,7 +2657,47 @@ function changeTo0or1(list) {
         printPascalTriangle(7);
         return [2 /*return*/];
     });
-}); })();
+}); });
 // 12.12 给出一个价格 用怪异国货币 2元 3元 和7元表示出来(一种方法即可)
 // 试试N - 2 N - 3和N - 7能否表示
 // 若能 加上2, 3, 7即可
+(function () { return __awaiter(_this, void 0, void 0, function () {
+    function strange(n) {
+        if (n <= 1)
+            return null;
+        if (n == 2)
+            return [2];
+        if (n == 3)
+            return [3];
+        if (n == 7)
+            return [7];
+        if (memory.has(n)) {
+            console.log("*");
+            return memory.get(n);
+        }
+        if (strange(n - 7)) {
+            var result = strange(n - 7);
+            result.push(7);
+            memory.set(n - 7, result);
+            return result;
+        }
+        if (strange(n - 3)) {
+            var result = strange(n - 3);
+            result.push(3);
+            memory.set(n - 3, result);
+            return result;
+        }
+        if (strange(n - 2)) {
+            var result = strange(n - 2);
+            result.push(2);
+            memory.set(n - 2, result);
+            return result;
+        }
+    }
+    var memory;
+    return __generator(this, function (_a) {
+        memory = new Map();
+        console.log(strange(231));
+        return [2 /*return*/];
+    });
+}); })();

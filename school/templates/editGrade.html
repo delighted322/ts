@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>填写成绩</title>
+</head>
+<body>
+<div>
+    {{data}}
+    <div>
+        学生姓名：{{data.studentName}}
+    </div>
+    <div>
+        学科ID：{{data.subjectId}}
+    </div>
+    <div>
+        <input value="{{data.grade}}">
+    </div>
+    <button type="submit">提交</button>
+</div>
+</body>

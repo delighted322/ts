@@ -67,3 +67,15 @@ async def editGrade(request: fastapi.Request, studentId: int,studentName:str, su
             "grade": grade,
         }
     })
+
+@app.post("/editGrade")
+async def submitGrade(studentName:str,subjectId:int,grade:str = fastapi.Form(None)):
+    # TODO: 有就更新 没有就新增
+    query = '''
+        UPDATE grade
+        SET 成绩 = 60
+        WHERE 学生ID = 9 AND 
+        学科ID = 2;
+    '''
+    return{"studentName":studentName,"subjectId":subjectId,"grade":grade}
+

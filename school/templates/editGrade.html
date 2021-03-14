@@ -6,15 +6,19 @@
 <body>
 <div>
     {{data}}
+
+
     <div>
-        学生姓名：{{data.studentName}}
+        <form action="/editGrade?studentName={{data.studentName}}&subjectId={{data.subjectId}}" method="POST">
+            <div name="studentName">
+                学生姓名：{{data.studentName}}
+            </div>
+            <div name="subjectId">
+                学科ID：{{data.subjectId}}
+            </div>
+            <input type="text" value="{{data.grade}}" name="grade">
+            <input type="submit"></input>
+        </form>
     </div>
-    <div>
-        学科ID：{{data.subjectId}}
-    </div>
-    <div>
-        <input value="{{data.grade}}">
-    </div>
-    <button type="submit">提交</button>
 </div>
 </body>

@@ -1,6 +1,7 @@
 import fastapi
 import databases
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 
 # uvicorn index:app --reload    启动命令
 
@@ -69,13 +70,15 @@ async def editGrade(request: fastapi.Request, studentId: int,studentName:str, su
     })
 
 @app.post("/editGrade")
-async def submitGrade(studentName:str,subjectId:int,grade:str = fastapi.Form(None)):
-    # TODO: 有就更新 没有就新增
-    query = '''
-        UPDATE grade
-        SET 成绩 = 60
-        WHERE 学生ID = 9 AND 
-        学科ID = 2;
-    '''
-    return{"studentName":studentName,"subjectId":subjectId,"grade":grade}
+async def submitGrade(studentId:int,studentName:str,subjectId:int,grade:str = fastapi.Form(None)):
+    update = 'UPDATE grade SET 成绩 = ' + str(grade) + ' WHERE 学生ID =' +  str(studentId) + ' AND 学科ID = ' + str(subjectId) + ';'
+    rows = await databases.execute(query = update)
+    print('--------------')
+    print(rows)
+    if (rows == 0):
+        insert = 'INSERT INTO grade (学生ID,学科ID,成绩) VALUES (' + str(studentId) + ',' + str(subjectId) + ',' + str(grade) + ');'
+        rows = await databases.execute(query = insert)
+    # TODO: 跳转显示成绩单的页面
+    return RedirectResponse("/editGrade")
+    # return{"studentId":studentId,"studentName":studentName,"subjectId":subjectId,"grade":grade}
 
